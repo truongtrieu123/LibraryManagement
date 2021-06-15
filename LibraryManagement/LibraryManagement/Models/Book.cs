@@ -29,6 +29,7 @@ namespace LibraryManagement.Models
         public Nullable<bool> StorageState { get; set; }
         public string Location { get; set; }
         public string PublishingCompany { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual StoredBook StoredBook { get; set; }

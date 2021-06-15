@@ -18,6 +18,7 @@
           <Property Name="StorageState" Type="bit" />
           <Property Name="Location" Type="nvarchar(max)" />
           <Property Name="PublishingCompany" Type="nvarchar(max)" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="BookRentalHitory">
           <Key>
@@ -64,6 +65,7 @@
           <Property Name="CatID" Type="bigint" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="StoredBook">
           <Key>
@@ -219,6 +221,7 @@
           <NavigationProperty Name="Category" Relationship="LibraryMangementModel.FK_Book_Category" FromRole="Book" ToRole="Category" />
           <NavigationProperty Name="StoredBook" Relationship="LibraryMangementModel.FK_StoredBook_Book" FromRole="Book" ToRole="StoredBook" />
           <NavigationProperty Name="BookRentalHitory" Relationship="LibraryMangementModel.BookRentalList" FromRole="Book" ToRole="BookRentalHitory" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="BookRentalHitory">
           <Key>
@@ -261,6 +264,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BookRentalHitory" Relationship="LibraryMangementModel.FK_BookRentalHitory_Reader" FromRole="Reader" ToRole="BookRentalHitory" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="StoredBook">
           <Key>
@@ -331,6 +335,7 @@
           <EntitySetMapping Name="Book">
             <EntityTypeMapping TypeName="LibraryMangementModel.Book">
               <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="PublishingCompany" ColumnName="PublishingCompany" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="StorageState" ColumnName="StorageState" />
@@ -376,6 +381,7 @@
           <EntitySetMapping Name="Reader">
             <EntityTypeMapping TypeName="LibraryMangementModel.Reader">
               <MappingFragment StoreEntitySet="Reader">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CatID" ColumnName="CatID" />

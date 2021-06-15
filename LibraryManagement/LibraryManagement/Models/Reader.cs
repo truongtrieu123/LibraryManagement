@@ -26,6 +26,7 @@ namespace LibraryManagement.Models
         public Nullable<long> CatID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
+        public byte[] Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookRentalHitory> BookRentalHitory { get; set; }
