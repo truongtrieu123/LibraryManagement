@@ -59,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +93,43 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Book.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookRentalHitory.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Config.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAO.cs" />
+    <Compile Include="Models\LibraryMangementEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryMangementEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryMangementEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryMangementEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryMangementEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reader.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoredBook.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>LibraryMangementEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -108,6 +147,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\LibraryMangementEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LibraryMangementEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\LibraryMangementEntities.edmx.diagram">
+      <DependentUpon>LibraryMangementEntities.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -118,9 +164,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\LibraryMangementEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryMangementEntities.edmx</DependentUpon>
+      <LastGenOutput>LibraryMangementEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LibraryMangementEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryMangementEntities.edmx</DependentUpon>
+      <LastGenOutput>LibraryMangementEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
