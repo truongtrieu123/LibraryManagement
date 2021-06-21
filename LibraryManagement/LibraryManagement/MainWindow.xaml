@@ -3,10 +3,183 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Height="700" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        >
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="openMenuButton">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="closeMenuButton">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <DockPanel LastChildFill="true" Height="700" Width="1200"  >
+        <Border BorderBrush="LightBlue" BorderThickness="3" >
+            <DockPanel>
+                <Grid Height="45" DockPanel.Dock="Top" VerticalAlignment="Top" Background="LightBlue" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="193*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon  Kind="Bookshelf" Width="70" Height="45" Grid.ColumnSpan="2" VerticalAlignment="Bottom"></materialDesign:PackIcon>
+                    <Label Foreground="LightYellow" FontWeight="ExtraBlack" FontSize="25" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="17.6,0,0,0" Grid.Column="1"  >
+                        Phần mềm quản lý thư viện
+                    </Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Grid.Column="1"  >
+
+                        <Button x:Name="minimiseButton" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Click="minimiseButtonClick" Padding="5" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatAccentBgButton}" >
+                            <materialDesign:PackIcon Kind="WindowMinimize" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightYellow"/>
+                        </Button>
+                        <Button x:Name="closeButton" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right"
+                    Click="closeButtonClick" Padding="0"  Style="{StaticResource MaterialDesignFlatAccentBgButton}">
+                            <materialDesign:PackIcon Kind="WindowClose" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="LightYellow"/>
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid x:Name="GridMenu" DockPanel.Dock="Left" Width="47" Background="MediumVioletRed" HorizontalAlignment="Left"  Panel.ZIndex="999">
+                    <StackPanel x:Name="menuStackPanel" >
+                        <Border Height="40" Margin="0" >
+                            <Grid >
+                                <Button x:Name="closeMenuButton"  Width="60" Height="50"  HorizontalAlignment="Right"  VerticalAlignment="Center"
+                            Click="closeMenuButtonClick"  Visibility="Collapsed" Background="Transparent" BorderBrush="Transparent" 
+                                        Style="{StaticResource MaterialDesignFlatAccentBgButton}"  >
+                                    <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Background="Transparent" Width="35" Height="35"/>
+                                </Button>
+                                <Button x:Name="openMenuButton" Height="Auto"  Width ="47" BorderBrush="Transparent" 
+                            Click="openMenuButtonClick" Background="Transparent" Padding="0" Style="{StaticResource MaterialDesignFlatAccentBgButton}" >
+                                    <materialDesign:PackIcon Kind="Menu" Width="40" Height="35" Foreground="White" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <StackPanel Name="UserAccountFrame" Visibility="Hidden">
+                            <Ellipse  Width="50" Height="50" >
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="./Data/Images/avatar-1577909_1280.png" ></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Label x:Name="Username" FontWeight="ExtraBlack" FontSize="18" HorizontalAlignment="Center">Admin1</Label>
+                        </StackPanel>
+                        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="MediumVioletRed" BorderBrush="Transparent">
+                            <ListViewItem Height="60" Width="200" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="BookList_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="Book" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="Book" Text="Sách"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Sách" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="RentABook_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="BookArrowDown" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="RentABook" Text="Mượn sách"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Mượn sách" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="Reader_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="Account" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="Reader" Text="Độc giả"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Độc giả" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="Category_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="Category" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="Category" Text="Thể loại"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Thể loại" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="Settings_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="Settings" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="Configuration" Text="Cấu hình"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Cấu hình" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            
+                            <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
+                                <Button Background="Transparent" BorderBrush="Transparent"
+                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                        Click="AboutUs_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    <StackPanel Orientation="Horizontal"  Height="60" >
+                                        <materialDesign:PackIcon Kind="About" Width="35" Height="35" Foreground="White" Background="Transparent" VerticalAlignment="Center" Margin="5">
+                                            <materialDesign:PackIcon.ToolTip>
+                                                <TextBlock x:Name="AboutUs" Text="Về chúng tôi"></TextBlock>
+                                            </materialDesign:PackIcon.ToolTip>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Về chúng tôi" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </ListViewItem>
+                            
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+                <Frame DockPanel.Dock="Right" Height="630" Width="1100" Name="Main" Margin="0" NavigationUIVisibility="Hidden"/>
+            </DockPanel>
+        </Border>
+    </DockPanel>
+
 </Window>

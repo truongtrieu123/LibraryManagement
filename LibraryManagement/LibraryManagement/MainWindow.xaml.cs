@@ -24,5 +24,141 @@ namespace LibraryManagement
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButtonClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeMenuButtonClick(object sender, RoutedEventArgs e)
+        {
+            HideMenu();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void openMenuButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowMenu();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ShowMenu()
+        {
+            if (closeMenuButton.Visibility != Visibility.Visible)
+            {
+                openMenuButton.Visibility = Visibility.Collapsed;
+                closeMenuButton.Visibility = Visibility.Visible;
+                UserAccountFrame.Visibility = Visibility.Visible;
+            }
+            else { }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void HideMenu()
+        {
+            if (openMenuButton.Visibility != Visibility.Visible)
+            {
+                openMenuButton.Visibility = Visibility.Visible;
+                closeMenuButton.Visibility = Visibility.Collapsed;
+                UserAccountFrame.Visibility = Visibility.Hidden;
+            }
+            else { }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var move = sender as System.Windows.Controls.Grid;
+            var win = Window.GetWindow(move);
+            win.DragMove();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void minimiseButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void maximiseButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BookList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RentABook_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Reader_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Category_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AboutUs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
