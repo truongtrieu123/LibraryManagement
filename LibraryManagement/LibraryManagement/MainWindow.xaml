@@ -57,35 +57,35 @@
                     </StackPanel>
 
                 </Grid>
+                <Grid x:Name="GridMenu" DockPanel.Dock="Left" Width="47" Background="MediumVioletRed"  HorizontalAlignment="Left"  >
 
-                <Grid x:Name="GridMenu" DockPanel.Dock="Left" Width="47" Background="MediumVioletRed" HorizontalAlignment="Left"  Panel.ZIndex="999">
-                    <StackPanel x:Name="menuStackPanel" >
+                    <StackPanel x:Name="menuStackPanel">
                         <Border Height="40" Margin="0" >
                             <Grid >
                                 <Button x:Name="closeMenuButton"  Width="60" Height="50"  HorizontalAlignment="Right"  VerticalAlignment="Center"
-                            Click="closeMenuButtonClick"  Visibility="Collapsed" Background="Transparent" BorderBrush="Transparent" 
-                                        Style="{StaticResource MaterialDesignFlatAccentBgButton}"  >
+                        Click="closeMenuButtonClick"  Visibility="Collapsed" Background="Transparent" BorderBrush="Transparent" 
+                                    Style="{StaticResource MaterialDesignFlatAccentBgButton}"  >
                                     <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White" Background="Transparent" Width="35" Height="35"/>
                                 </Button>
                                 <Button x:Name="openMenuButton" Height="Auto"  Width ="47" BorderBrush="Transparent" 
-                            Click="openMenuButtonClick" Background="Transparent" Padding="0" Style="{StaticResource MaterialDesignFlatAccentBgButton}" >
+                        Click="openMenuButtonClick" Background="Transparent" Padding="0" Style="{StaticResource MaterialDesignFlatAccentBgButton}" >
                                     <materialDesign:PackIcon Kind="Menu" Width="40" Height="35" Foreground="White" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Button>
                             </Grid>
                         </Border>
                         <StackPanel Name="UserAccountFrame" Visibility="Hidden">
-                            <Ellipse  Width="50" Height="50" >
+                            <Ellipse  Width="70" Height="70" >
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="./Data/Images/avatar-1577909_1280.png" ></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Label x:Name="Username" FontWeight="ExtraBlack" FontSize="18" HorizontalAlignment="Center">Admin1</Label>
+                            <Label x:Name="Username" FontWeight="ExtraBlack" FontSize="15" HorizontalAlignment="Center">Admin1</Label>
                         </StackPanel>
                         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="MediumVioletRed" BorderBrush="Transparent">
                             <ListViewItem Height="60" Width="200" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="BookList_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="BookList_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Book" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -99,8 +99,8 @@
                             </ListViewItem>
                             <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="RentABook_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="RentABook_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="BookArrowDown" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -114,8 +114,8 @@
                             </ListViewItem>
                             <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="Reader_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="Reader_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Account" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -129,8 +129,8 @@
                             </ListViewItem>
                             <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="Category_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="Category_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Category" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -144,8 +144,8 @@
                             </ListViewItem>
                             <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="Settings_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="Settings_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Settings" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -157,11 +157,11 @@
                                 </Button>
 
                             </ListViewItem>
-                            
+
                             <ListViewItem Height="60" Foreground="LightYellow" Padding="0">
                                 <Button Background="Transparent" BorderBrush="Transparent"
-                                        Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
-                                        Click="AboutUs_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
+                                    Height="60" Padding="0" Width="200"  HorizontalContentAlignment="Left"
+                                    Click="AboutUs_Click" Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="About" Width="35" Height="35" Foreground="White" Background="Transparent" VerticalAlignment="Center" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
@@ -173,11 +173,11 @@
                                 </Button>
 
                             </ListViewItem>
-                            
+
                         </ListView>
                     </StackPanel>
                 </Grid>
-                <Frame DockPanel.Dock="Right" Height="630" Width="1100" Name="Main" Margin="0" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="MainContentFrame" DockPanel.Dock="Right" Height="630" Width="1100" Margin="0" NavigationUIVisibility="Hidden"/>
             </DockPanel>
         </Border>
     </DockPanel>
