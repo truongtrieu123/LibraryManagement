@@ -4,11 +4,127 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagement.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="BooksList">
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-    <Grid>
-        
-    </Grid>
+        mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="1100"
+      Title="BooksList">
+    <Page.Resources>
+        <Style x:Key="StandardButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                Background="{TemplateBinding Background}">
+                            <Border Margin="5" BorderThickness="2" CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                                <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Border BorderBrush="DarkBlue" BorderThickness="2" CornerRadius="10" Margin="10">
+                <StackPanel Orientation="Horizontal" Width="750" Height="50" >
+                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm ở đây"  Margin="20,0,0,5" FontSize="25" 
+                            VerticalContentAlignment="Center" Width="680"></TextBox>
+                    <Button Background="White"  Width="40" Height="40" Padding="0" Foreground="Black" BorderBrush="Transparent" ToolTip="Tìm kiếm"
+                            Click="SearchButton_Click" Style="{StaticResource MaterialDesignFlatAccentButton}">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Search" Width="40" Height="40" Background="Transparent"                    
+                               VerticalAlignment="Center"></materialDesign:PackIcon>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <Button  Padding="0" Width="200" Height="52" 
+                    ToolTip="Thêm sách mới" Click="AddNewBook_Click" VerticalContentAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="BookAdd" Foreground="Black" Width="40" Height="40"></materialDesign:PackIcon>
+                        <Label FontSize="23" FontWeight="ExtraBold" Foreground="Black">Thêm mới</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom">
+
+            <DataGrid Name="BooksListDatagrid" IsReadOnly="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="2"
+                      Style="{StaticResource MaterialDesignDataGrid}" AutoGenerateColumns="false" Height="549" Margin="10,0">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="ID" Width="70" CanUserSort="True"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ID}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Tên sách" Width="325" CanUserSort="True"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Tác giả" Width="225"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Author}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Thể loại" Width="150"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=CatName}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Vị trí kệ" Width="100"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Location}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Header="Xem" Width="80"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                            Background="LightGray" Width="40" Height="40" Padding="0"
+                                            BorderBrush="Transparent" Click="ViewBook_Click" ToolTip="Xem chi tiết">
+                                        <Button.Content>
+                                            <materialDesign:PackIcon Kind="Eye" Foreground="DarkOrange" Width="30" Height="30"></materialDesign:PackIcon>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Chỉnh sửa" Width="100"  >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"  
+                                            Background="LightGray" Width="40" Height="40" Padding="0"
+                                            BorderBrush="Transparent" Click="EditBook_Click" ToolTip="Chỉnh sửa nội dung">
+                                        <Button.Content>
+                                            <materialDesign:PackIcon Kind="Edit" Foreground="DarkGreen" Width="30" Height="30"></materialDesign:PackIcon>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+    </DockPanel>
 </Page>

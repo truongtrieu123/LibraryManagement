@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagement.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -138,7 +139,8 @@ namespace LibraryManagement
 
         private void BookList_Click(object sender, RoutedEventArgs e)
         {
-
+            App.BooksListPage = new BooksList();
+            MainContentFrame.Content = App.BooksListPage;
         }
 
         private void RentABook_Click(object sender, RoutedEventArgs e)

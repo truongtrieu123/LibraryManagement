@@ -1,12 +1,10 @@
-﻿using System;
+﻿using LibraryManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace LibraryManagement.Models
 {
-    class DAO
+    public class DAO
     {
         public LibraryMangementEntities Database;
 
@@ -60,12 +58,31 @@ namespace LibraryManagement.Models
             Database.SaveChanges();
         }
 
-        public List<Book> GetBooks()
-        { 
-            var booklist = Database.Book.ToList();
-            return booklist;
+        public List<BookModel> GetBooks()
+        {
+            var bookslist = Database.Book.Join(
+                Database.Category,
+                b => b.CatID,
+                c => c.ID,
+                (b, c) => new BookModel()
+                {
+                    ID = b.ID,
+                    Name = b.Name,
+                    Author = b.Author,
+                    Location = b.Location,
+                    CatID = b.CatID,
+                    ImportDate = b.ImportDate,
+                    PublicationDate = b.PublicationDate,
+                    PublishingCompany = b.PublishingCompany,
+                    Image = b.Image,
+                    CatName = c.Name
+                }).ToList();
+
+            return bookslist;
         }
         
+
+
         public Book GetBookInfoById(long ID)
         {
             var bookinfo = Database.Book.Where(r => r.ID == ID).SingleOrDefault();
