@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.ViewModels;
+using LibraryManagement.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,6 @@ namespace LibraryManagement.Models
                     ImportDate = b.ImportDate,
                     PublicationDate = b.PublicationDate,
                     PublishingCompany = b.PublishingCompany,
-                    Image = b.Image,
                     CatName = c.Name
                 }).ToList();
 

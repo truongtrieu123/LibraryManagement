@@ -2,9 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibraryManagement"
-             StartupUri="MainWindow.xaml">
+            xmlns:views="clr-namespace:LibraryManagement.Views"
+            xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels"
+             Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
+            <DataTemplate DataType="{x:Type viewmodels:AddNewBookViewModel}">
+                <views:AddNewBook></views:AddNewBook>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BooksListViewModel}">
+                <views:BooksList></views:BooksList>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

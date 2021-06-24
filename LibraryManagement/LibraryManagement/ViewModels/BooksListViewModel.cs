@@ -4,32 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagement.DataAccess;
+using System.Windows.Input;
+using LibraryManagement.Commands;
+using LibraryManagement.Views;
 
 namespace LibraryManagement.ViewModels
 {
-    public class BookModel
-    {
-        public long ID { get; set; }
-        public string Name { get; set; }
-        public long CatID { get; set; }
-        public string Author { get; set; }
-        public Nullable<System.DateTime> PublicationDate { get; set; }
-        public Nullable<System.DateTime> ImportDate { get; set; }
-        public Nullable<bool> StorageState { get; set; }
-        public string Location { get; set; }
-        public string PublishingCompany { get; set; }
-        public byte[] Image { get; set; }
-        public string CatName { get; set; }
-    }
-
-    public class BooksListViewModel
+    public class BooksListViewModel : BaseViewModel
     {
         public List<BookModel> BooksList { get; set; }
-        public DAO DAO;
+        public DAO _DAO = new DAO();
+        public MainViewModel mainViewModel;
+        public ICommand UpdateView { get; set; }
+        public int ID = 0;
+        public string Name = "Trieu2";
         public BooksListViewModel()
         {
-            DAO = new DAO();
-            BooksList = DAO.GetBooks();
+            BooksList = _DAO.GetBooks();
+
+
+        }
+
+        public BooksListViewModel(MainViewModel param)
+        {
+            Console.WriteLine("BooksListViewModel");
+            BooksList = _DAO.GetBooks();
+
+            mainViewModel = param;
+            UpdateView = new UpdateMainViewCommand(mainViewModel);
+            Console.WriteLine(BooksList[0].Name);
+            Console.WriteLine(BooksList[1].Name);
+            Console.WriteLine(BooksList[2].Name);
+
         }
 
         public List<BookModel> GetBooksList ()
