@@ -51,7 +51,7 @@
                 HorizontalAlignment="Center"
                 Margin="10">
                     <Rectangle.Fill>
-                        <ImageBrush x:Name="AvatarImage"></ImageBrush>
+                        <ImageBrush x:Name="AvatarImage" ImageSource="{Binding ImageSource}"></ImageBrush>
                     </Rectangle.Fill>
                 </Rectangle>
                 <Button  x:Name="AddImage"
@@ -76,13 +76,17 @@
                                  HorizontalAlignment="Center" 
                                  Height="70" 
                                  Margin="10" TextWrapping="Wrap"   
+                                 Text="{Binding BookName}"
                                  FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      materialDesign:HintAssist.Hint="Tên sách">
                         </TextBox>
                         <StackPanel Orientation="Horizontal" Margin="10,10,10,5" HorizontalAlignment="Center">
                             <ComboBox Name="chosenCategory" 
-                            materialDesign:HintAssist.Hint="Thể loại sách"  VerticalContentAlignment="Bottom" FontSize="25"
-                            Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                                      ItemsSource="{Binding AllCategory}"
+                                      SelectedIndex="{Binding SelectedIndex}"
+                                        materialDesign:HintAssist.Hint="Thể loại sách"  
+                                      VerticalContentAlignment="Bottom" FontSize="25"
+                                        Style="{StaticResource MaterialDesignOutlinedComboBox}" 
                             Height="70"   Width="300" SelectionChanged="chosenCategory_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -97,6 +101,7 @@
                             <TextBox Height="70" Width="300" TextWrapping="Wrap" 
                                     Margin="45,0,0,0"
                                     FontSize="25" 
+                                     Text="{Binding Author}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     Name="Author"  
                                      materialDesign:HintAssist.Hint="Tác giả">
@@ -104,14 +109,22 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="10,10,10,10" HorizontalAlignment="Center">
                             <TextBox Name="PublishingCompany"  
-                         Height="70" Width="300" TextWrapping="Wrap"
-                         FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="Nhà xuất bản">
+                                    Height="70" Width="300" 
+                                     TextWrapping="Wrap"
+                                     FontSize="25" 
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                       materialDesign:HintAssist.Hint="Nhà xuất bản"
+                                     Text="{Binding PublishingCompany}"
+                                     >
                             </TextBox>
                             <TextBox Name="Location"  
-                            Height="70"  Width="300" Margin="45,0,0,0" TextWrapping="Wrap"
-                         FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="Vị trí kệ">
+                                     Height="70"  Width="300" 
+                                     Margin="45,0,0,0" 
+                                     TextWrapping="Wrap"
+                                     FontSize="25" 
+                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     materialDesign:HintAssist.Hint="Vị trí kệ"
+                                     Text="{Binding Location}">
                             </TextBox>
                         </StackPanel>
 
