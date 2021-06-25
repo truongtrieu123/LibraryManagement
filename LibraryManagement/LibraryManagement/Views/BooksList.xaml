@@ -41,7 +41,7 @@
         
         <StackPanel DockPanel.Dock="Bottom">
 
-            <DataGrid Name="BooksListDatagrid" IsReadOnly="True" 
+            <DataGrid x:Name="BooksListDatagrid" IsReadOnly="True" 
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                       BorderThickness="2"
                       Style="{StaticResource MaterialDesignDataGrid}" 
@@ -90,8 +90,8 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                             Background="LightGray" Width="40" Height="40" Padding="0"
-                                            BorderBrush="Transparent" Click="ViewBook_Click" ToolTip="Xem chi tiết"
-                                            Command="{Binding ViewBookDetail, ElementName=BooksListDataGrid}" CommandParameter="{Binding ID}">
+                                            BorderBrush="Transparent" ToolTip="Xem chi tiết"
+                                            Command="{Binding Path=DataContext.ViewBookDetail,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
                                         <Button.Content>
                                             <materialDesign:PackIcon Kind="Eye" Foreground="DarkOrange" Width="30" Height="30"></materialDesign:PackIcon>
                                         </Button.Content>
@@ -106,8 +106,8 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"  
                                             Background="LightGray" Width="40" Height="40" Padding="0"
-                                            BorderBrush="Transparent" Click="EditBook_Click" ToolTip="Chỉnh sửa nội dung"
-                                            Command="{Binding EditBookInfo, ElementName=BooksListDataGrid}" CommandParameter="{Binding ID}">
+                                            BorderBrush="Transparent"  ToolTip="Chỉnh sửa nội dung"
+                                            Command="{Binding Path=DataContext.EditBookInfo,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
                                         <Button.Content>
                                             <materialDesign:PackIcon Kind="Edit" Foreground="DarkGreen" Width="30" Height="30"></materialDesign:PackIcon>
                                         </Button.Content>
