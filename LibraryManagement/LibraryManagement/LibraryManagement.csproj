@@ -86,14 +86,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateMainViewCommand.cs" />
     <Compile Include="DataAccess\BookModel.cs" />
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BookDetailViewModel.cs" />
     <Compile Include="ViewModels\BooksListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\AddNewBook.xaml.cs">
       <DependentUpon>AddNewBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BookDetail.xaml.cs">
+      <DependentUpon>BookDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BooksList.xaml.cs">
       <DependentUpon>BooksList.xaml</DependentUpon>
@@ -106,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddNewBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BookDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
