@@ -83,10 +83,25 @@ namespace LibraryManagement.Models
         
 
 
-        public Book GetBookInfoById(long ID)
+        public BookModel GetBookInfoById(long ID)
         {
             var bookinfo = Database.Book.Where(r => r.ID == ID).SingleOrDefault();
-            return bookinfo;
+            string catName = GetCategoryNameByID(bookinfo.CatID);
+            BookModel res = new BookModel()
+            {
+                Name = bookinfo.Name,
+                ID = bookinfo.ID,
+                CatID = bookinfo.CatID,
+                CatName=catName,
+                Author=bookinfo.Author,
+                PublicationDate=bookinfo.PublicationDate,
+                PublishingCompany=bookinfo.PublishingCompany,
+                StorageState=bookinfo.StorageState,
+                Location=bookinfo.Location,
+                ImportDate=bookinfo.ImportDate,
+                
+            };
+            return res;
         }
 
         public List<Book> SearchBookName(string text)

@@ -29,13 +29,10 @@ namespace LibraryManagement.Commands
         public void Execute(object parameter)
         {
             Console.WriteLine("UpdateMainViewCommand");
-            Console.WriteLine(parameter.ToString());
             if (parameter.ToString() == "BooksList") {
                 Console.WriteLine(parameter.ToString());
                 viewModel.SelectedViewModel = new BooksListViewModel(viewModel);
-
             }
-
         }
     }
 }

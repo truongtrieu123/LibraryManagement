@@ -17,8 +17,9 @@ namespace LibraryManagement.ViewModels
         public DAO _DAO = new DAO();
         public MainViewModel mainViewModel;
         public ICommand UpdateView { get; set; }
-        public int ID = 0;
-        public string Name = "Trieu2";
+        public ICommand ViewBookDetail { get; set; }
+        public ICommand EditBookInfo { get; set; }
+
         public BooksListViewModel()
         {
             BooksList = _DAO.GetBooks();
@@ -33,15 +34,17 @@ namespace LibraryManagement.ViewModels
 
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(mainViewModel);
-            Console.WriteLine(BooksList[0].Name);
-            Console.WriteLine(BooksList[1].Name);
-            Console.WriteLine(BooksList[2].Name);
-
+            ViewBookDetail = new RelayCommand(o => ShowBookDetail(o));
+            EditBookInfo = new RelayCommand(o => ShowBookDetail(o));
         }
 
-        public List<BookModel> GetBooksList ()
+        public void ShowBookDetail(object parameter)
         {
-            return BooksList;
+            long ID = long.Parse(parameter.ToString());
+            Console.WriteLine("BookListViewModel");
+            Console.WriteLine(ID);
+            BookDetail screen = new BookDetail(ID);
+            screen.Show();
         }
     }
 }
