@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryManagement.Views;
+using LibraryManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement
+namespace LibraryManagement.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +25,8 @@ namespace LibraryManagement
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("MainWindow");
+            DataContext = new MainViewModel();
         }
 
         /// <summary>
@@ -138,7 +142,7 @@ namespace LibraryManagement
 
         private void BookList_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void RentABook_Click(object sender, RoutedEventArgs e)
@@ -157,6 +161,11 @@ namespace LibraryManagement
         }
 
         private void AboutUs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BorrowBook_Click(object sender, RoutedEventArgs e)
         {
 
         }

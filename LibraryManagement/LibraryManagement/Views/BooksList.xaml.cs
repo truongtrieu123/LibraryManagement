@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryManagement.DataAccess;
+using LibraryManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,36 @@ namespace LibraryManagement.Views
     /// <summary>
     /// Interaction logic for BooksList.xaml
     /// </summary>
-    public partial class BooksList : Page
+    public partial class BooksList : UserControl
     {
         public BooksList()
         {
             InitializeComponent();
+
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void AddNewBook_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (BooksListDatagrid.SelectedIndex != -1)
+            {
+            }
+        }
+
+        private void EditBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (BooksListDatagrid.SelectedIndex != -1)
+            {
+            }
         }
     }
 }
+
