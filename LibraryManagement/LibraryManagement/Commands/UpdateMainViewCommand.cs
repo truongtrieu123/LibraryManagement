@@ -37,6 +37,10 @@ namespace LibraryManagement.Commands
             {
                 viewModel.SelectedViewModel = new AddNewBookViewModel(viewModel);
             }
+            else if(parameter.ToString() == "ReaderList")
+            {
+                viewModel.SelectedViewModel = new ReaderListViewModel(viewModel);
+            }
         }
     }
 }

@@ -125,8 +125,7 @@
                                         Height="60" Padding="0" Width="200"  
                                         HorizontalContentAlignment="Left"
                                         Command="{Binding UpdateView}"
-                                        CommandParameter="Reader"
-                                        Click="Reader_Click" 
+                                        CommandParameter="ReaderList"
                                         Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Account" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">

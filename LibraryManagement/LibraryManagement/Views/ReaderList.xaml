@@ -47,8 +47,8 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                   BorderThickness="2"
                   Style="{StaticResource MaterialDesignDataGrid}" 
-                  AutoGenerateColumns="false" Height="Auto" Margin="10,0"
-                  ItemsSource="{Binding BooksList}">
+                  AutoGenerateColumns="false" Height="Auto" Margin="0,0,20,0"
+                  ItemsSource="{Binding ReaderList}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Mã độc giả" Width="1*" CanUserSort="True"  >
                     <DataGridTemplateColumn.CellTemplate>

@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibraryMangementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CatID" Type="bigint" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PublicationDate" Type="datetime" />
+          <Property Name="ImportDate" Type="datetime" />
+          <Property Name="StorageState" Type="bit" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="PublishingCompany" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BookRentalHitory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ReaderID" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" />
+          <Property Name="ReturnDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BookRentalList">
+          <Key>
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="BookRentalID" />
+          </Key>
+          <Property Name="BookID" Type="bigint" Nullable="false" />
+          <Property Name="BookRentalID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CatID" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="StoredBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="StorageDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookRentalHitory_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="BookRentalHitory" Type="Self.BookRentalHitory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookRentalHitory">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookRentalList_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BookRentalList" Type="Self.BookRentalList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookRentalList">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookRentalList_BookRentalHitory">
+          <End Role="BookRentalHitory" Type="Self.BookRentalHitory" Multiplicity="1" />
+          <End Role="BookRentalList" Type="Self.BookRentalList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookRentalHitory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookRentalList">
+              <PropertyRef Name="BookRentalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoredBook_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="StoredBook" Type="Self.StoredBook" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StoredBook">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryMangementModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookRentalHitory" EntityType="Self.BookRentalHitory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookRentalList" EntityType="Self.BookRentalList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reader" EntityType="Self.Reader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoredBook" EntityType="Self.StoredBook" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookRentalHitory_Reader" Association="Self.FK_BookRentalHitory_Reader">
+            <End Role="Reader" EntitySet="Reader" />
+            <End Role="BookRentalHitory" EntitySet="BookRentalHitory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookRentalList_Book" Association="Self.FK_BookRentalList_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookRentalList" EntitySet="BookRentalList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookRentalList_BookRentalHitory" Association="Self.FK_BookRentalList_BookRentalHitory">
+            <End Role="BookRentalHitory" EntitySet="BookRentalHitory" />
+            <End Role="BookRentalList" EntitySet="BookRentalList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoredBook_Book" Association="Self.FK_StoredBook_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="StoredBook" EntitySet="StoredBook" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryMangementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CatID" Type="Int64" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PublicationDate" Type="DateTime" Precision="3" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <Property Name="StorageState" Type="Boolean" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishingCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="StoredBook" Relationship="Self.FK_StoredBook_Book" FromRole="Book" ToRole="StoredBook" />
+          <NavigationProperty Name="BookRentalHitories" Relationship="Self.BookRentalList" FromRole="Book" ToRole="BookRentalHitory" />
+        </EntityType>
+        <EntityType Name="BookRentalHitory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ReaderID" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_BookRentalHitory_Reader" FromRole="BookRentalHitory" ToRole="Reader" />
+          <NavigationProperty Name="Books" Relationship="Self.BookRentalList" FromRole="BookRentalHitory" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Category" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CatID" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookRentalHitories" Relationship="Self.FK_BookRentalHitory_Reader" FromRole="Reader" ToRole="BookRentalHitory" />
+        </EntityType>
+        <EntityType Name="StoredBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="StorageDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_StoredBook_Book" FromRole="StoredBook" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoredBook_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="StoredBook" Type="Self.StoredBook" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StoredBook">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookRentalHitory_Reader">
+          <End Role="Reader" Type="Self.Reader" Multiplicity="1" />
+          <End Role="BookRentalHitory" Type="Self.BookRentalHitory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookRentalHitory">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BookRentalList">
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <End Role="BookRentalHitory" Type="Self.BookRentalHitory" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="LibraryMangementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="BookRentalHitories" EntityType="Self.BookRentalHitory" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Configs" EntityType="Self.Config" />
+          <EntitySet Name="Readers" EntityType="Self.Reader" />
+          <EntitySet Name="StoredBooks" EntityType="Self.StoredBook" />
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoredBook_Book" Association="Self.FK_StoredBook_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="StoredBook" EntitySet="StoredBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookRentalHitory_Reader" Association="Self.FK_BookRentalHitory_Reader">
+            <End Role="Reader" EntitySet="Readers" />
+            <End Role="BookRentalHitory" EntitySet="BookRentalHitories" />
+          </AssociationSet>
+          <AssociationSet Name="BookRentalList" Association="Self.BookRentalList">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BookRentalHitory" EntitySet="BookRentalHitories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryMangementModelStoreContainer" CdmEntityContainer="LibraryMangementEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LibraryMangementModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="StorageState" ColumnName="StorageState" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PublishingCompany" ColumnName="PublishingCompany" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookRentalHitories">
+            <EntityTypeMapping TypeName="LibraryMangementModel.BookRentalHitory">
+              <MappingFragment StoreEntitySet="BookRentalHitory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="LibraryMangementModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="LibraryMangementModel.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateType" ColumnName="DateType" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readers">
+            <EntityTypeMapping TypeName="LibraryMangementModel.Reader">
+              <MappingFragment StoreEntitySet="Reader">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoredBooks">
+            <EntityTypeMapping TypeName="LibraryMangementModel.StoredBook">
+              <MappingFragment StoreEntitySet="StoredBook">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StorageDate" ColumnName="StorageDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BookRentalList" TypeName="LibraryMangementModel.BookRentalList" StoreEntitySet="BookRentalList">
+            <EndProperty Name="Book">
+              <ScalarProperty Name="ID" ColumnName="BookID" />
+            </EndProperty>
+            <EndProperty Name="BookRentalHitory">
+              <ScalarProperty Name="ID" ColumnName="BookRentalID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
