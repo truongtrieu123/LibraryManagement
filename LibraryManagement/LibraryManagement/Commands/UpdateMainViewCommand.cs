@@ -33,6 +33,10 @@ namespace LibraryManagement.Commands
                 Console.WriteLine(parameter.ToString());
                 viewModel.SelectedViewModel = new BooksListViewModel(viewModel);
             }
+            else if (parameter.ToString()=="AddNewBook")
+            {
+                viewModel.SelectedViewModel = new AddNewBookViewModel(viewModel);
+            }
         }
     }
 }

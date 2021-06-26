@@ -16,17 +16,12 @@
                         ToolTip="Quay lại" DockPanel.Dock="Left"
                         HorizontalAlignment="Left" 
                         Style="{StaticResource MaterialDesignFlatMidBgButton}"  
-                        Margin="0" Padding="0">
+                        Margin="0" Padding="0"
+                        Command="{Binding UpdateView}"
+                        CommandParameter="BooksList">
+
                     <Button.Content>
                         <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
-                    </Button.Content>
-                </Button>
-                <Button Click="Refresh_Click" Width="50" Height="50" 
-                Foreground="Black"   FontSize="30" ToolTip="Refresh" 
-                Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                Margin="0" Padding="0" DockPanel.Dock="Right">
-                    <Button.Content>
-                        <materialDesign:PackIcon Kind="Refresh" Width="50" Height="50"></materialDesign:PackIcon>
                     </Button.Content>
                 </Button>
                 <Label Content="Tạo sách mới" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" ></Label>
@@ -34,10 +29,13 @@
             </DockPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,10" HorizontalAlignment="Center" Orientation="Horizontal" >
-            <Button Click="SaveBook_Click" Width="250" 
-                Foreground="Black" Content="Lưu thông tin"  FontSize="30" 
-                Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                Height="50"></Button>
+            <Button 
+                    Command="{Binding SaveNewBook}"
+                    Width="250" 
+                    Foreground="Black" 
+                    Content="Lưu thông tin"  FontSize="30" 
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                    Height="50"></Button>
 
         </StackPanel>
 
@@ -57,7 +55,7 @@
                 <Button  x:Name="AddImage"
                     Height="70" Width="70" 
                     Padding="0" Margin="10"
-                    Click="AddAvatarImage_Click">
+                    Command="{Binding AddImage}">
                     <Button.Content>
                         <materialDesign:PackIcon Kind="ImageAdd"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="70"/>
                     </Button.Content>
@@ -83,9 +81,9 @@
                         <StackPanel Orientation="Horizontal" Margin="10,10,10,5" HorizontalAlignment="Center">
                             <ComboBox Name="chosenCategory" 
                                       ItemsSource="{Binding AllCategory}"
-                                      SelectedIndex="{Binding SelectedIndex}"
                                         materialDesign:HintAssist.Hint="Thể loại sách"  
                                       VerticalContentAlignment="Bottom" FontSize="25"
+                                      SelectedIndex="{Binding CategoryID}"
                                         Style="{StaticResource MaterialDesignOutlinedComboBox}" 
                             Height="70"   Width="300" SelectionChanged="chosenCategory_SelectionChanged">
                                 <ComboBox.ItemTemplate>
@@ -133,7 +131,7 @@
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     materialDesign:HintAssist.Hint="Ngày xuất bản" 
                                     Height="70" Width="320" FontSize="25"
-                                    ></DatePicker>
+                                    SelectedDate="{Binding PublicationDate}"></DatePicker>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
