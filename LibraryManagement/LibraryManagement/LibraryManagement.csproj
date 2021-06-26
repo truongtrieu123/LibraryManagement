@@ -146,9 +146,17 @@
     </Compile>
     <Compile Include="Views\EditBook.xaml.cs">
       <DependentUpon>EditBook.xaml</DependentUpon>
+    <Compile Include="Views\CategoryList.xaml.cs">
+      <DependentUpon>CategoryList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReaderList.xaml.cs">
+      <DependentUpon>ReaderList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddNewBook.xaml">
       <SubType>Designer</SubType>
@@ -163,10 +171,19 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditBook.xaml">
+    <Page Include="Views\CategoryList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReaderList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
