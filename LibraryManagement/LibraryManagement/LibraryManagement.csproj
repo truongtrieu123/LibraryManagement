@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Views\EditBook.xaml.cs">
       <DependentUpon>EditBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryList.xaml.cs">
       <DependentUpon>CategoryList.xaml</DependentUpon>
     </Compile>
@@ -171,6 +172,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CategoryList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
