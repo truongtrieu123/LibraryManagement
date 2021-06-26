@@ -13,10 +13,10 @@ namespace LibraryManagement.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LibraryMangementEntities : DbContext
+    public partial class LibraryManagementEntities : DbContext
     {
-        public LibraryMangementEntities()
-            : base("name=LibraryMangementEntities")
+        public LibraryManagementEntities()
+            : base("name=LibraryManagementEntities")
         {
         }
     
@@ -25,12 +25,12 @@ namespace LibraryManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Book> Book { get; set; }
-        public virtual DbSet<BookRentalHitory> BookRentalHitory { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Config> Config { get; set; }
-        public virtual DbSet<Reader> Reader { get; set; }
-        public virtual DbSet<StoredBook> StoredBook { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<BookRentalHitory> BookRentalHitories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<Reader> Readers { get; set; }
+        public virtual DbSet<StoredBook> StoredBooks { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
