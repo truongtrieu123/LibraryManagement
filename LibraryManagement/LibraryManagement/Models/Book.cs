@@ -17,7 +17,7 @@ namespace LibraryManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            this.BookRentalHitory = new HashSet<BookRentalHitory>();
+            this.BookRentalHitories = new HashSet<BookRentalHitory>();
         }
     
         public long ID { get; set; }
@@ -29,11 +29,11 @@ namespace LibraryManagement.Models
         public Nullable<bool> StorageState { get; set; }
         public string Location { get; set; }
         public string PublishingCompany { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual StoredBook StoredBook { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookRentalHitory> BookRentalHitory { get; set; }
+        public virtual ICollection<BookRentalHitory> BookRentalHitories { get; set; }
     }
 }

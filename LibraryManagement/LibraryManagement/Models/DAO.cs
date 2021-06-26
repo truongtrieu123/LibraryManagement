@@ -3,11 +3,12 @@ using LibraryManagement.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace LibraryManagement.Models
 {
     public class DAO
     {
-        public LibraryMangementEntities Database;
+        public LibraryManagementEntities Database;
 
         /// <summary>
         /// Hàm khởi tạo kết nối cơ sở dữ liệu
@@ -16,7 +17,7 @@ namespace LibraryManagement.Models
         /// <returns></returns>
         public DAO()
         {
-            Database = new LibraryMangementEntities();
+            Database = new LibraryManagementEntities();
         }
         /// <summary>
         /// Hàm cập nhật cơ sở dữ liệu
@@ -31,7 +32,7 @@ namespace LibraryManagement.Models
         public bool UpdateBookInfoByID(Book updateInfo, long ID)
         {
             bool check = true;
-            var cur = (from c in Database.Book
+            var cur = (from c in Database.Books
                        where c.ID == ID
                        select c).SingleOrDefault();
             try
@@ -52,17 +53,21 @@ namespace LibraryManagement.Models
             return check;
         }
 
-        public void AddNewBook(Book bookInfo)
+        public long  AddNewBook(Book bookInfo)//without book id
         {
-            var books = Database.Book;
+            var books = Database.Books;
+            long ID = Database.Books.Max(b => b.ID);
+            ID += 1;
+            bookInfo.ID = ID;
             books.Add(bookInfo);
             Database.SaveChanges();
+            return ID;
         }
 
         public List<BookModel> GetBooks()
         {
-            var bookslist = Database.Book.Join(
-                Database.Category,
+            var bookslist = Database.Books.Join(
+                Database.Categories,
                 b => b.CatID,
                 c => c.ID,
                 (b, c) => new BookModel()
@@ -81,11 +86,16 @@ namespace LibraryManagement.Models
             return bookslist;
         }
         
-
+        public void UpdateBookImageByID(long ID, string ImageSource)
+        {
+            Book cur = (Book)Database.Books.Where(b => b.ID == ID).SingleOrDefault();
+            cur.Image = ImageSource;
+            Database.SaveChanges();
+        }
 
         public BookModel GetBookInfoById(long ID)
         {
-            var bookinfo = Database.Book.Where(r => r.ID == ID).SingleOrDefault();
+            var bookinfo = Database.Books.Where(r => r.ID == ID).SingleOrDefault();
             string catName = GetCategoryNameByID(bookinfo.CatID);
             BookModel res = new BookModel()
             {
@@ -106,7 +116,7 @@ namespace LibraryManagement.Models
 
         public List<Book> SearchBookName(string text)
         {
-            var query = Database.Book.Where(r => r.Name.Contains(text));
+            var query = Database.Books.Where(r => r.Name.Contains(text));
             List<Book>  booklist = query.ToList();
             return booklist;
         }
@@ -117,13 +127,13 @@ namespace LibraryManagement.Models
         #region Category
         public List<Category> GetCategories()
         {
-            var Categories = Database.Category.ToList();
+            var Categories = Database.Categories.ToList();
             return Categories;
         }
 
         public void AddNewCategory(Category catInfo)
         {
-            Database.Category.Add(catInfo);
+            Database.Categories.Add(catInfo);
             Database.SaveChanges();
         }
 
@@ -134,7 +144,7 @@ namespace LibraryManagement.Models
 
         public string GetCategoryNameByID(long ID)
         {
-            string res = (from c in Database.Category
+            string res = (from c in Database.Categories
                           where c.ID == ID
                           select c.Name).SingleOrDefault();
             return res;
@@ -145,13 +155,13 @@ namespace LibraryManagement.Models
         #region  Reader
         public List<Reader> GetReaderList()
         {
-            var readerlist = Database.Reader.ToList();
+            var readerlist = Database.Readers.ToList();
             return readerlist;
         }
 
         public Reader GetReaderInfoById(long Id)
         {
-            var reader = (from r in Database.Reader
+            var reader = (from r in Database.Readers
                           where r.ID == Id
                           select r).SingleOrDefault();
             return reader;
@@ -159,7 +169,7 @@ namespace LibraryManagement.Models
 
         public List<Reader> SearchReaderName(string text)
         {
-            var query = Database.Reader.Where(r => r.Name.Contains(text));
+            var query = Database.Readers.Where(r => r.Name.Contains(text));
             List<Reader> readerlist = query.ToList();
             return readerlist;
         }
@@ -172,7 +182,7 @@ namespace LibraryManagement.Models
         public bool UpdateReaderInfo(Reader info, long ID)
         {
             bool check = true;
-            var cur = Database.Reader.Where(r=>r.ID==ID).SingleOrDefault();
+            var cur = Database.Readers.Where(r=>r.ID==ID).SingleOrDefault();
             try
             {
                 cur.Name = info.Name;
@@ -189,7 +199,7 @@ namespace LibraryManagement.Models
 
         public void AddNewReader(Reader info )
         {
-            var reader = Database.Reader;
+            var reader = Database.Readers;
             reader.Add(info);
             Database.SaveChanges();
 

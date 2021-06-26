@@ -17,13 +17,13 @@ namespace LibraryManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Book = new HashSet<Book>();
+            this.Books = new HashSet<Book>();
         }
     
         public long ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Book> Book { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }
