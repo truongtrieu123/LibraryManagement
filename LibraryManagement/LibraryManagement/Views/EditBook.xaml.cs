@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LibraryManagement.Views
 {
     /// <summary>
-    /// Interaction logic for EditBookInfo.xaml
+    /// Interaction logic for EditBook.xaml
     /// </summary>
-    public partial class EditBookInfo : Window
+    public partial class EditBook : UserControl
     {
-        public EditBookInfo()
+        public EditBook()
         {
             InitializeComponent();
         }
