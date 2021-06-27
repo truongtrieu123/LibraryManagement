@@ -3,12 +3,13 @@ using LibraryManagement.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using LibraryManagement.Helper;
 
 namespace LibraryManagement.Models
 {
     public class DAO
     {
-        public LibraryMangementEntities Database;
+        public LibraryManagementEntities Database;
 
         /// <summary>
         /// Hàm khởi tạo kết nối cơ sở dữ liệu
@@ -17,7 +18,7 @@ namespace LibraryManagement.Models
         /// <returns></returns>
         public DAO()
         {
-            Database = new LibraryMangementEntities();
+            Database = new LibraryManagementEntities();
         }
         /// <summary>
         /// Hàm cập nhật cơ sở dữ liệu
@@ -43,9 +44,11 @@ namespace LibraryManagement.Models
                 cur.Name = updateInfo.Name;
                 cur.PublicationDate = updateInfo.PublicationDate;
                 cur.PublishingCompany = updateInfo.PublishingCompany;
-                
+                cur.Image = updateInfo.Image;
+                cur.StorageState = updateInfo.StorageState;
+                cur.StoredBook = updateInfo.StoredBook;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 check = false;
             }
@@ -53,7 +56,7 @@ namespace LibraryManagement.Models
             return check;
         }
 
-        public long  AddNewBook(Book bookInfo)//without book id
+        public long AddNewBook(Book bookInfo)//without book id
         {
             var books = Database.Books;
             long ID = Database.Books.Max(b => b.ID);
@@ -82,10 +85,9 @@ namespace LibraryManagement.Models
                     PublishingCompany = b.PublishingCompany,
                     CatName = c.Name
                 }).ToList();
-
             return bookslist;
         }
-        
+
         public void UpdateBookImageByID(long ID, string ImageSource)
         {
             Book cur = (Book)Database.Books.Where(b => b.ID == ID).SingleOrDefault();
@@ -102,25 +104,57 @@ namespace LibraryManagement.Models
                 Name = bookinfo.Name,
                 ID = bookinfo.ID,
                 CatID = bookinfo.CatID,
-                CatName=catName,
-                Author=bookinfo.Author,
-                PublicationDate=bookinfo.PublicationDate,
-                PublishingCompany=bookinfo.PublishingCompany,
-                StorageState=bookinfo.StorageState,
-                Location=bookinfo.Location,
-                ImportDate=bookinfo.ImportDate,
-                
+                CatName = catName,
+                Author = bookinfo.Author,
+                PublicationDate = bookinfo.PublicationDate,
+                PublishingCompany = bookinfo.PublishingCompany,
+                StorageState = bookinfo.StorageState,
+                Location = bookinfo.Location,
+                ImportDate = bookinfo.ImportDate,
+                Image = bookinfo.Image,
             };
             return res;
         }
 
-        public List<Book> SearchBookName(string text)
+        public List<BookModel> SearchBookName(string text)
         {
-            var query = Database.Books.Where(r => r.Name.Contains(text));
-            List<Book>  booklist = query.ToList();
-            return booklist;
+
+            List<Book> booksList = Database.Books.Where(delegate (Book b)
+            {
+                if (HelperFunctions.RemovedUTF(b.Name.ToLower()).Contains(HelperFunctions.RemovedUTF(text.ToLower())))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }).ToList();
+
+            List<BookModel> res = new List<BookModel>();
+            foreach (var i in booksList)
+            {
+                BookModel cur = new BookModel
+                {
+                    ID = i.ID,
+                    Name = i.Name,
+                    Author = i.Author,
+                    CatID = i.CatID,
+                    PublicationDate = i.PublicationDate,
+                    PublishingCompany = i.PublishingCompany,
+                    Image = i.Image,
+                    ImportDate = i.ImportDate,
+                    StorageState = i.StorageState,
+                    Location = i.Location,
+                    CatName = Database.Categories.Where(c => c.ID == i.CatID).SingleOrDefault().Name.ToString(),
+                };
+                res.Add(cur);
+            }
+
+            return res;
         }
-        
+
+
         #endregion Book
 
 
@@ -212,15 +246,16 @@ namespace LibraryManagement.Models
 
 
         #region Config
-
         public void GetConfigList()
         {
 
         }
 
-        public void GetConfigById()
+        public int PublicationDateTimeInterval()
         {
+            Config cur = Database.Configs.Where(c => c.Name == "KhoangCachNamXuatBan").SingleOrDefault();
 
+            return int.Parse(cur.Value);
         }
 
         public void UpdateConfig()
