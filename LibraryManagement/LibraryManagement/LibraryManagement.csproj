@@ -90,38 +90,45 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateMainViewCommand.cs" />
     <Compile Include="DataAccess\BookModel.cs" />
+    <Compile Include="Helper\HelperFunctions.cs" />
     <Compile Include="Models\Book.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BookRentalHitory.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookRentalList.cs">
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryManagementEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryManagementEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryManagementEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Reader.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StoredBook.cs">
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\[LibraryMangement].Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>[LibraryMangement].Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\[LibraryMangement].cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>[LibraryMangement].tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\[LibraryMangement].Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>[LibraryMangement].edmx</DependentUpon>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -224,12 +231,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\[LibraryMangement].edmx">
+    <EntityDeploy Include="Models\LibraryManagementEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>[LibraryMangement].Designer.cs</LastGenOutput>
+      <LastGenOutput>LibraryManagementEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\[LibraryMangement].edmx.diagram">
-      <DependentUpon>[LibraryMangement].edmx</DependentUpon>
+    <None Include="Models\LibraryManagementEntities.edmx.diagram">
+      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -255,15 +262,15 @@
     <Folder Include="Data\Images\BookImages\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\[LibraryMangement].Context.tt">
+    <Content Include="Models\LibraryManagementEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>[LibraryMangement].edmx</DependentUpon>
-      <LastGenOutput>[LibraryMangement].Context.cs</LastGenOutput>
+      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
+      <LastGenOutput>LibraryManagementEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\[LibraryMangement].tt">
+    <Content Include="Models\LibraryManagementEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>[LibraryMangement].edmx</DependentUpon>
-      <LastGenOutput>[LibraryMangement].cs</LastGenOutput>
+      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
+      <LastGenOutput>LibraryManagementEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
