@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\ReaderModel.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\UpdateMainViewCommand.cs" />
+    <Compile Include="DataAccess\BookModel.cs" />
+    <Compile Include="Helper\HelperFunctions.cs" />
     <Compile Include="Models\Book.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
@@ -96,12 +100,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Commands\UpdateMainViewCommand.cs" />
     <Compile Include="Models\Config.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\BookModel.cs" />
     <Compile Include="Models\LibraryManagementEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -121,6 +122,9 @@
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StoredBook.cs">
+      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
