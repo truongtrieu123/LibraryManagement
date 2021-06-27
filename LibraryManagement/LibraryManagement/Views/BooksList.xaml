@@ -16,10 +16,21 @@
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Border BorderBrush="DarkBlue" BorderThickness="2" CornerRadius="10" Margin="10">
                 <StackPanel Orientation="Horizontal" Width="750" Height="50" >
-                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm ở đây"  Margin="20,0,0,5" FontSize="25" 
-                            VerticalContentAlignment="Center" Width="680" ></TextBox>
-                    <Button Background="White"  Width="40" Height="40" Padding="0" Foreground="Black" BorderBrush="Transparent" ToolTip="Tìm kiếm"
-                            Click="SearchButton_Click" Style="{StaticResource MaterialDesignFlatAccentButton}">
+                    <TextBox x:Name="SearchingContent"
+                            materialDesign:HintAssist.Hint="Tìm kiếm ở đây"  Margin="20,0,0,5" FontSize="25" 
+                            VerticalContentAlignment="Center" Width="680" 
+                            Text="{Binding MySearchingText,Mode=TwoWay}"
+                            TextChanged="TextBox_TextChanged"
+                            ></TextBox>
+                    <Button Background="White"  
+                            Width="40" Height="40" 
+                            Padding="0" 
+                            Foreground="Black" 
+                            BorderBrush="Transparent" 
+                            ToolTip="Tìm kiếm"
+                            Command="{Binding SearchBookName}"
+                            CommandParameter="{Binding Path=Text, ElementName=SearchingContent}"
+                            Style="{StaticResource MaterialDesignFlatAccentButton}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Search" Width="40" Height="40" Background="Transparent"                    
                                VerticalAlignment="Center"></materialDesign:PackIcon>
@@ -28,7 +39,7 @@
                 </StackPanel>
             </Border>
             <Button  Padding="0" Width="200" Height="52" 
-                    ToolTip="Thêm sách mới" Click="AddNewBook_Click" VerticalContentAlignment="Center" 
+                    ToolTip="Thêm sách mới"  VerticalContentAlignment="Center" 
                     Style="{StaticResource MaterialDesignFlatMidBgButton}"
                      Command="{Binding UpdateView}"
                      CommandParameter="AddNewBook">
@@ -37,6 +48,15 @@
                         <materialDesign:PackIcon Kind="BookAdd" Foreground="Black" Width="40" Height="40"></materialDesign:PackIcon>
                         <Label FontSize="23" FontWeight="ExtraBold" Foreground="Black">Thêm mới</Label>
                     </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Margin="30,0,0,0"
+                    Padding="0" Width="50" Height="52"  
+                    VerticalContentAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                    Command="{Binding RefreshPage}">
+                <Button.Content>
+                        <materialDesign:PackIcon Kind="Refresh" Foreground="Black" Width="40" Height="40"></materialDesign:PackIcon>
                 </Button.Content>
             </Button>
         </StackPanel>
@@ -109,7 +129,7 @@
                                     <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"  
                                             Background="LightGray" Width="40" Height="40" Padding="0"
                                             BorderBrush="Transparent"  ToolTip="Chỉnh sửa nội dung"
-                                            Command="{Binding Path=DataContext.EditBookInfo,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
+                                            Command="{Binding Path=DataContext.EditBook,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
                                         <Button.Content>
                                             <materialDesign:PackIcon Kind="Edit" Foreground="DarkGreen" Width="30" Height="30"></materialDesign:PackIcon>
                                         </Button.Content>

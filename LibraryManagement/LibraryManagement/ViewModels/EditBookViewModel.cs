@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.Commands;
+using LibraryManagement.DataAccess;
 using LibraryManagement.Models;
 using Microsoft.Win32;
 using System;
@@ -17,10 +18,10 @@ namespace LibraryManagement.ViewModels
     {
         public MainViewModel mainViewModel { get; set; }
         public ICommand UpdateView { get; set; }
-        public ICommand SaveNewBook { get; set; }
+        public ICommand SaveChanges { get; set; }
         public ICommand AddImage { get; set; }
         public DAO _DAO { get; set; }
-        public Book Book { get; set; }
+        public BookModel BookModel{ get; set; }
         private string _bookName;
         public string BookName
         {
@@ -133,21 +134,31 @@ namespace LibraryManagement.ViewModels
             }
         }
 
+        public long ID { get; set; }
 
-        public EditBookViewModel(MainViewModel param)
+        public int PublicationDateTimeInterval { get; set; }
+
+        public EditBookViewModel(MainViewModel param, long Id)
         {
             _DAO = new DAO();
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(this.mainViewModel);
-            SaveNewBook = new RelayCommand(o => StoreDateInput());
+            SaveChanges = new RelayCommand(o => SaveDataInput());
             AddImage = new RelayCommand(o => AddBookImage());
             AllCategory = _DAO.GetCategories();
-            
+            PublicationDateTimeInterval = _DAO.PublicationDateTimeInterval();
 
+            this.ID = Id;
+            BookModel = _DAO.GetBookInfoById(this.ID);
 
-
-            PublicationDate = System.DateTime.Now;
-            ImageSource = null;
+            BookName = BookModel.Name;
+            Author = BookModel.Author;
+            CategoryID = BookModel.CatID - 1;
+            PublicationDate = (DateTime)BookModel.PublicationDate;
+            PublishingCompany = BookModel.PublishingCompany;
+            ImageSource = AppDomain.CurrentDomain.BaseDirectory + BookModel.Image;
+            Location = BookModel.Location;
+            Console.WriteLine(ImageSource);
         }
 
         public void AddBookImage()
@@ -179,12 +190,16 @@ namespace LibraryManagement.ViewModels
             {
                 message = "Ban chưa chọn thể loại sách";
             }
+            else if(PublicationDate.Year< System.DateTime.Now.Year - PublicationDateTimeInterval)
+            {
+                message = "Quyển sách hợp lệ có thời điểm xuất bản trong 10 năm trở lại";
+            }
             else if (BookName == null || Author == null || Location == null || PublishingCompany == null
                 || BookName == "" || Author == "" || Location == "" || PublishingCompany == "")
                 message = "Yêu cầu nhập đầy đủ thông tin";
             return message;
         }
-        public string StoreDateInput()
+        public string SaveDataInput()
         {
             string message = CheckDataInputError();
             AlertInputDataError(message);
@@ -192,18 +207,10 @@ namespace LibraryManagement.ViewModels
             Book cur = new Book();
             if (message == null)
             {
-                cur.Name = BookName;
-                cur.Author = Author;
-                cur.Location = Location;
-                cur.CatID = CategoryID + 1;
-                cur.StorageState = false;
-                cur.ImportDate = PublicationDate;
-                cur.PublishingCompany = PublishingCompany;
-                cur.PublicationDate = PublicationDate;
-                long ID = 0;
-                ID = _DAO.AddNewBook(cur);
-                string SourcePath = TransferSelectedImageToImageFolder(ID);
-                _DAO.UpdateBookImageByID(ID, ImageSource);
+                cur = this.GetBookInfoFromGUI();
+
+                string SourcePath = ReplaceOldImageByNewImage(ID);
+                _DAO.UpdateBookInfoByID(cur, this.ID);
                 MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK);
                 mainViewModel.SelectedViewModel = new BooksListViewModel(mainViewModel);
             }
@@ -211,14 +218,32 @@ namespace LibraryManagement.ViewModels
             return message;
         }
 
-        public string TransferSelectedImageToImageFolder(long ID)
+        public Book GetBookInfoFromGUI()
+        {
+            Book res = new Book()
+            {
+                Name = this.BookName,
+                Author = this.Author,
+                Location = this.Location,
+                CatID = this.CategoryID + 1,
+                StorageState = false,
+                ImportDate = this.PublicationDate,
+                PublishingCompany = this.PublishingCompany,
+                PublicationDate = this.PublicationDate,
+                StoredBook = null,
+                Image = "Database\\Images\\BookImages\\" + this.ID.ToString() + ".png",
+            };
+            return res;
+        }
+
+        public string ReplaceOldImageByNewImage(long ID)
         {
             if (ImageSource == null)
             {
                 ImageSource = "";
             }
             var directory = AppDomain.CurrentDomain.BaseDirectory;
-            directory += "/Database\\Images\\CakeImages";
+            directory += "Database\\Images\\BookImages\\";
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -230,6 +255,7 @@ namespace LibraryManagement.ViewModels
             string destFile = System.IO.Path.Combine(targetPath, fileName);
             System.GC.Collect();
             System.GC.WaitForPendingFinalizers();
+            System.IO.File.Delete(destFile);
             System.IO.File.Copy(sourceFile, destFile, true);
 
             return destFile;

@@ -19,7 +19,7 @@
                        Width="230" Height="300"
                        RadiusX="20" RadiusY="20">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Data/Images/icon1.png" Stretch="Fill"></ImageBrush>
+                    <ImageBrush ImageSource="{Binding  BookModel.Image}" Stretch="Fill"></ImageBrush>
                 </Rectangle.Fill>
             </Rectangle>
             <Label Content="Ảnh thực tế" 
