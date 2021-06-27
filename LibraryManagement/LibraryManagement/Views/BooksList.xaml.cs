@@ -28,27 +28,10 @@ namespace LibraryManagement.Views
 
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-        }
-
-        private void AddNewBook_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ViewBook_Click(object sender, RoutedEventArgs e)
-        {
-            if (BooksListDatagrid.SelectedIndex != -1)
-            {
-            }
-        }
-
-        private void EditBook_Click(object sender, RoutedEventArgs e)
-        {
-            if (BooksListDatagrid.SelectedIndex != -1)
-            {
-            }
+            var binding = ((TextBox)sender).GetBindingExpression(TextBox.TextProperty);
+            binding.UpdateSource();
         }
     }
 }

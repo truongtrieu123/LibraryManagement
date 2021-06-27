@@ -19,7 +19,7 @@
                        Width="230" Height="300"
                        RadiusX="20" RadiusY="20">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="/Data/Images/icon1.png" Stretch="Fill"></ImageBrush>
+                    <ImageBrush ImageSource="{Binding  BookModel.Image}" Stretch="Fill"></ImageBrush>
                 </Rectangle.Fill>
             </Rectangle>
             <Label Content="Ảnh thực tế" 
@@ -27,14 +27,14 @@
                HorizontalAlignment="Center"
                Foreground="Black"
                FontWeight="Bold">
-                </Label>
+            </Label>
         </StackPanel>
         <ScrollViewer DockPanel.Dock="Right"
                     Margin="10,10,0,0"
                     Width="430" 
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    
+
             <StackPanel Orientation="Vertical" Width="410" Margin="0,0,20,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Text="Tên sách: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
@@ -70,9 +70,9 @@
                     <TextBlock Text="{Binding StorageState}" TextWrapping="Wrap" Width="200"  FontSize="18"  ></TextBlock>
                 </StackPanel>
             </StackPanel>
-            
+
         </ScrollViewer>
-        
+
 
     </DockPanel>
 

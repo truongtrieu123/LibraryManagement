@@ -28,11 +28,11 @@ namespace LibraryManagement.ViewModels
             get { return _bookName; }
             set
             {
-                if(value!=null)
+                if (value != null)
                 {
                     _bookName = value;
                     OnPropertyChanged(nameof(_bookName));
-                }    
+                }
             }
         }
 
@@ -98,7 +98,7 @@ namespace LibraryManagement.ViewModels
             get { return _publishingCompany; }
             set
             {
-                if (value != null )
+                if (value != null)
                 {
                     _publishingCompany = value;
                     OnPropertyChanged(nameof(_publishingCompany));
@@ -112,7 +112,7 @@ namespace LibraryManagement.ViewModels
             get { return _allCategory; }
             set
             {
-                if(value!=null )
+                if (value != null)
                 {
                     _allCategory = value;
                     OnPropertyChanged(nameof(_allCategory));
@@ -134,6 +134,8 @@ namespace LibraryManagement.ViewModels
             }
         }
 
+        public int PublicationDateTimeInterval { get; set; }
+
 
         public AddNewBookViewModel(MainViewModel param)
         {
@@ -143,32 +145,37 @@ namespace LibraryManagement.ViewModels
             SaveNewBook = new RelayCommand(o => StoreDateInput());
             AddImage = new RelayCommand(o => AddBookImage());
             AllCategory = _DAO.GetCategories();
+
+            PublicationDateTimeInterval = _DAO.PublicationDateTimeInterval();
+
+
             CategoryID = -1;
             PublicationDate = System.DateTime.Now;
             ImageSource = null;
         }
 
-        public void  AddBookImage()
+        public void AddBookImage()
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
                 File.ReadAllText(openFileDialog.FileName);
-                try {
+                try
+                {
                     ImageSource = openFileDialog.FileName;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
                 }
             }
             OnPropertyChanged(nameof(ImageSource));
         }
-        
-        public string  CheckDataInputError()
+
+        public string CheckDataInputError()
         {
             string message = null;
-            if (ImageSource == null || ImageSource=="")
+            if (ImageSource == null || ImageSource == "")
             {
                 message = "Bạn chưa thêm ảnh đại diện";
             }
@@ -176,8 +183,12 @@ namespace LibraryManagement.ViewModels
             {
                 message = "Ban chưa chọn thể loại sách";
             }
+            else if (PublicationDate.Year < System.DateTime.Now.Year - PublicationDateTimeInterval)
+            {
+                message = "Quyển sách hợp lệ có thời điểm xuất bản trong 10 năm trở lại";
+            }
             else if (BookName == null || Author == null || Location == null || PublishingCompany == null
-                ||BookName==""|| Author=="" ||Location==""||PublishingCompany=="")
+                || BookName == "" || Author == "" || Location == "" || PublishingCompany == "")
                 message = "Yêu cầu nhập đầy đủ thông tin";
             return message;
         }
@@ -187,20 +198,20 @@ namespace LibraryManagement.ViewModels
             AlertInputDataError(message);
 
             Book cur = new Book();
-            if(message==null)
+            if (message == null)
             {
-                cur.Name = BookName;
-                cur.Author = Author;
-                cur.Location = Location;
-                cur.CatID = CategoryID + 1;
-                cur.StorageState = false;
-                cur.ImportDate = PublicationDate;
-                cur.PublishingCompany = PublishingCompany;
-                cur.PublicationDate = PublicationDate;
+                cur = this.GetBookInfoFromGUI();
+
                 long ID = 0;
+
                 ID = _DAO.AddNewBook(cur);
-                string SourcePath = TransferSelectedImageToImageFolder(ID);
-                _DAO.UpdateBookImageByID(ID, ImageSource);
+
+                TransferSelectedImageToImageFolder(ID);
+
+                string SourcePath = "Database\\Images\\BookImages\\" + ID.ToString() + ".png";
+                Console.WriteLine(SourcePath);
+                _DAO.UpdateBookImageByID(ID, SourcePath);
+
                 MessageBox.Show("Thêm sách thành công", "Thông báo", MessageBoxButton.OK);
                 mainViewModel.SelectedViewModel = new BooksListViewModel(mainViewModel);
             }
@@ -215,7 +226,7 @@ namespace LibraryManagement.ViewModels
                 ImageSource = "";
             }
             var directory = AppDomain.CurrentDomain.BaseDirectory;
-            directory += "/Database\\Images\\CakeImages";
+            directory += "Database\\Images\\BookImages\\";
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -230,6 +241,23 @@ namespace LibraryManagement.ViewModels
             System.IO.File.Copy(sourceFile, destFile, true);
 
             return destFile;
+        }
+
+        public Book GetBookInfoFromGUI()
+        {
+            Book res = new Book()
+            {
+                Name = this.BookName,
+                Author = this.Author,
+                Location = this.Location,
+                CatID = this.CategoryID + 1,
+                StorageState = false,
+                ImportDate = System.DateTime.Now,
+                PublishingCompany = this.PublishingCompany,
+                PublicationDate = this.PublicationDate,
+                StoredBook = null
+            };
+            return res;
         }
 
         public void AlertInputDataError(string message)

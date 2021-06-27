@@ -23,6 +23,9 @@ namespace LibraryManagement.ViewModels
             Title = "Sách " + BookModel.Name;
             if (BookModel.StorageState == true) StorageState = "Đang lưu kho";
             else StorageState = "Đang lưu hành";
+            BookModel.Image = AppDomain.CurrentDomain.BaseDirectory + BookModel.Image;
+            Console.WriteLine(BookModel.Image);
+
         }
     }
 }
