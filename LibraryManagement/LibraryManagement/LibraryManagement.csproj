@@ -128,6 +128,7 @@
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
+    <Compile Include="ViewModels\AddReaderViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BookDetailViewModel.cs" />
     <Compile Include="ViewModels\BooksListViewModel.cs" />
@@ -139,6 +140,9 @@
     </Compile>
     <Compile Include="Views\AddNewBook.xaml.cs">
       <DependentUpon>AddNewBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddReader.xaml.cs">
+      <DependentUpon>AddReader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BookDetail.xaml.cs">
       <DependentUpon>BookDetail.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddNewBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddReader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

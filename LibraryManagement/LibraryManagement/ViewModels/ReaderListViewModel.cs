@@ -20,7 +20,6 @@ namespace LibraryManagement.ViewModels
         public ReaderListViewModel()
         {
             ReaderList = _DAO.GetReaderList().ToList();
-            Console.WriteLine(ReaderList[0].ToString());
         }
 
         public ReaderListViewModel(MainViewModel param)
