@@ -34,8 +34,8 @@ namespace LibraryManagement.ViewModels
             set
             {
                 _mySearchingText = value;
-                SearchBooksName(_mySearchingText);
-                Console.WriteLine("text is null");
+                //SearchBooksName(_mySearchingText);
+                //Console.WriteLine("text is null");
                 OnPropertyChanged(MySearchingText);
             }
         }
