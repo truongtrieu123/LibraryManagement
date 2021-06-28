@@ -127,9 +127,6 @@
     <Compile Include="Models\StoredBook.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BookDetailViewModel.cs" />

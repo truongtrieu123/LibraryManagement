@@ -13,10 +13,10 @@ namespace LibraryManagement.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LibraryManagementEntities : DbContext
+    public partial class LibraryMangementEntities : DbContext
     {
-        public LibraryManagementEntities()
-            : base("name=LibraryManagementEntities")
+        public LibraryMangementEntities()
+            : base("name=LibraryMangementEntities")
         {
         }
     
@@ -32,6 +32,5 @@ namespace LibraryManagement.Models
         public virtual DbSet<Config> Configs { get; set; }
         public virtual DbSet<Reader> Readers { get; set; }
         public virtual DbSet<StoredBook> StoredBooks { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

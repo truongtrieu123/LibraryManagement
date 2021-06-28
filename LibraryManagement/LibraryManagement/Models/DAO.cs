@@ -9,7 +9,7 @@ namespace LibraryManagement.Models
 {
     public class DAO
     {
-        public LibraryManagementEntities Database;
+        public LibraryMangementEntities Database;
 
         /// <summary>
         /// Hàm khởi tạo kết nối cơ sở dữ liệu
@@ -18,7 +18,7 @@ namespace LibraryManagement.Models
         /// <returns></returns>
         public DAO()
         {
-            Database = new LibraryManagementEntities();
+            Database = new LibraryMangementEntities();
         }
         /// <summary>
         /// Hàm cập nhật cơ sở dữ liệu
