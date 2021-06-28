@@ -118,10 +118,10 @@ namespace LibraryManagement.Models
 
         public List<BookModel> SearchBookName(string text)
         {
-
+            string normalizedText = HelperFunctions.RemovedUTF(text.ToLower());
             List<Book> booksList = Database.Books.Where(delegate (Book b)
             {
-                if (HelperFunctions.RemovedUTF(b.Name.ToLower()).Contains(HelperFunctions.RemovedUTF(text.ToLower())))
+                if (HelperFunctions.RemovedUTF(b.Name.ToLower()).Contains(normalizedText))
                 {
                     return true;
                 }
@@ -242,6 +242,81 @@ namespace LibraryManagement.Models
 
 
         #region BookRentalHistory
+        public List<BookRentalHitoryModel> GetBookRentalHitories()
+        {
+            List<BookRentalHitoryModel> BookRentalHitoryList = Database.BookRentalHitories.Join
+                (
+                    Database.Readers,
+                    b => b.ReaderID,
+                    r => r.ID,
+                    (b, r) => new BookRentalHitoryModel 
+                    {
+                        ReaderID=b.ReaderID,
+                        ReaderName=r.Name,
+                        CreatedDate=b.CreatedDate,
+                        ReturnDate=b.ReturnDate,
+                        ID=b.ID,
+                        State=b.State,
+
+                    }
+                ).ToList();
+
+            return BookRentalHitoryList;
+        }
+
+        public List<BookRentalHitoryModel> SearchBookRentalHistories(string text, string stateName = "Tất cả")
+        {
+            //Eliminate punctuation and toLower text
+            string normalizedText = "";
+            if (text != null)
+                normalizedText = HelperFunctions.RemovedUTF(text.ToLower());
+
+            //Get all items list
+            IQueryable<BookRentalHitoryModel> bookRentalList = (from r in Database.Readers
+                                                                join b in Database.BookRentalHitories
+                                                                on r.ID equals b.ReaderID
+                                                                select new BookRentalHitoryModel
+                                                                {
+                                                                    ReaderID = b.ReaderID,
+                                                                    ReaderName = r.Name,
+                                                                    CreatedDate = b.CreatedDate,
+                                                                    ReturnDate = b.ReturnDate,
+                                                                    ID = b.ID,
+                                                                    State = b.State
+                                                                });
+
+            //Search text name 
+            IQueryable<BookRentalHitoryModel> searchedList = bookRentalList;
+            if (normalizedText != null || normalizedText != "") {
+                searchedList = bookRentalList.Where(delegate (BookRentalHitoryModel r)
+                {
+                    if (HelperFunctions.RemovedUTF(r.ReaderName.ToLower()).Contains(normalizedText)
+                    || (r.ID.ToString().Contains(normalizedText)))
+                        return true;
+                    else return false;
+                }).AsQueryable();
+            }
+
+            //Categorize items
+            DateTime Noww = System.DateTime.Now;
+            int BookBorrowTimeInterval=int.Parse(Database.Configs.Where(r=>r.Name== "SoNgayMuonToiDa").SingleOrDefault().Value);
+            IQueryable<BookRentalHitoryModel> categorizedList = searchedList;
+            if (stateName == "Đang mượn")
+                categorizedList = searchedList.Where(r => r.State == false);
+            else if (stateName == "Đã trả")
+                categorizedList = searchedList.Where(r => r.State == true);
+            else if (stateName == "Quá hạn")
+                categorizedList = searchedList.Where(r => ((Noww-r.CreatedDate).Days > BookBorrowTimeInterval) && (r.State==false) );
+
+            //Add items into return result;
+            List <BookRentalHitoryModel> res = new List<BookRentalHitoryModel>();
+
+            foreach (var i in categorizedList.ToList())
+                res.Add(i);
+
+
+            return res;
+        }
         #endregion BookRentalHistory
 
 

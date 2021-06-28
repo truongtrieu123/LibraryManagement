@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryManagement.Views"
+             xmlns:converter="clr-namespace:LibraryManagement"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="630" d:DesignWidth="1100"
              Background="AliceBlue"
@@ -14,6 +16,9 @@
              TextOptions.TextFormattingMode="Ideal"
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}">
+    <UserControl.Resources>
+        <converter:StateConverter x:Key="StateNameConverter"></converter:StateConverter>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -21,26 +26,66 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.4*"/>
+                <ColumnDefinition Width="1.2*"/>
+
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" BorderBrush="#007ABE" BorderThickness="2" Margin="50, 10">
+            <Border Grid.Column="0" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10"
+                    CornerRadius="10">
                 <DockPanel LastChildFill="True" Width="Auto" Height="Auto" >
                     <Button DockPanel.Dock="Right" Width="50" Height="Auto" Padding="0" Foreground="#CACACA" BorderBrush="Transparent" ToolTip="Tìm kiếm"
-                          Style="{StaticResource MaterialDesignFlatAccentButton}">
+                            Style="{StaticResource MaterialDesignFlatAccentButton}"
+                            Command="{Binding SearchBookRental}"
+                            CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Search" Width="30" Height="Auto" Background="Transparent"                    
                                VerticalAlignment="Center"></materialDesign:PackIcon>
                         </Button.Content>
                     </Button>
-                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm phiếu mượn" materialDesign:HintAssist.Foreground="#AAAAAA" FontSize="21" 
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm phiếu mượn" 
+                             x:Name="SearchingTextBox"
+                             ToolTip="Nhập mã phiếu mượn hoặc tên độc giả"
+                             materialDesign:HintAssist.Foreground="#AAAAAA" 
+                             FontSize="21" Height="45" Width="450"
+                             Text="{Binding SearchingText, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged"
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <TextBox.InputBindings>
+                            <KeyBinding
+                                Key="Enter"
+                                Command="{Binding SearchBookRental}"
+                                CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
                 </DockPanel>
             </Border>
-            <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="0, 10, 100,10" CornerRadius="5" Padding="0">
-                <Button x:Name="addReaderButton" Background="Transparent" Foreground="#0066FF" FontFamily="Roboto" FontSize="25" FontWeight="Bold" BorderThickness="0" Margin="0" Padding="0" Height="Auto">
+            <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+                <ComboBox  Background="Transparent" Foreground="#0066FF" 
+                           FontFamily="Roboto" BorderBrush="Transparent" 
+                           BorderThickness="0" 
+                           Padding="10,0,5,0" Height="52" VerticalContentAlignment="Center"
+                           Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                           ItemsSource="{Binding StateCategoryList}"
+                           SelectedIndex="{Binding SelectedState,UpdateSourceTrigger=PropertyChanged}"
+                           VerticalAlignment="Bottom">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectedStateChanged}" CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"/>
+                            </i:EventTrigger>   
+                        </i:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StateName}" FontFamily="Roboto" FontSize="21" FontWeight="Bold"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                </ComboBox>
+            </Border>
+            <Border Grid.Column="2" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+                <Button x:Name="d" Background="Transparent" Foreground="#0066FF" FontFamily="Roboto" FontSize="20" FontWeight="Bold" BorderThickness="0" Margin="0" Padding="0" Height="Auto">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Add" Padding="0" Margin="0" Width="50" Height="Auto"/>
+                        <materialDesign:PackIcon Kind="Add" Padding="0" Margin="0" Width="40" Height="Auto"/>
                         <TextBlock VerticalAlignment="Center">Lập phiếu mượn</TextBlock>
                     </StackPanel>
                 </Button>
@@ -48,7 +93,7 @@
         </Grid>
         <DataGrid Grid.Row="1" x:Name="BookRentalListDatagrid" IsReadOnly="True" 
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                  BorderThickness="2"
+                  BorderThickness="2" 
                   Style="{StaticResource MaterialDesignDataGrid}" 
                   AutoGenerateColumns="false" Height="Auto" Margin="10"
                   ItemsSource="{Binding BookRentalList}">
@@ -63,14 +108,21 @@
                 <DataGridTemplateColumn Header="Độc giả" Width="2*" CanUserSort="True"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            <TextBlock Text="{Binding Path=ReaderName}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Ngày mượn" Width="1*" CanUserSort="True"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                            <TextBlock Text="{Binding Path=CreatedDate}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Tình trạng" Width="1*" CanUserSort="True"  >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=State, Converter={StaticResource StateNameConverter}}"  TextWrapping="Wrap" FontSize="16"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

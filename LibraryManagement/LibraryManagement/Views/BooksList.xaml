@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
-             d:DesignHeight="630" d:DesignWidth="1100" 
+             d:DesignHeight="630" d:DesignWidth="1100"
+             Background="AliceBlue"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="15"
@@ -21,8 +22,13 @@
                             VerticalContentAlignment="Center" Width="680" 
                             Text="{Binding MySearchingText,Mode=TwoWay}"
                             TextChanged="TextBox_TextChanged"
-                            ></TextBox>
-                    <Button Background="White"  
+                            >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SearchBookName}"
+                            CommandParameter="{Binding Path=Text, ElementName=SearchingContent}"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button Background="AliceBlue"  
                             Width="40" Height="40" 
                             Padding="0" 
                             Foreground="Black" 
