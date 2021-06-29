@@ -21,10 +21,9 @@ namespace LibraryManagement.ViewModels
 
             BookModel = DAO.GetBookInfoById(ID);
             Title = "Sách " + BookModel.Name;
-            if (BookModel.StorageState == true) StorageState = "Đang lưu kho";
-            else StorageState = "Đang lưu hành";
+            if (BookModel.StorageState == true) StorageState = "Đang lưu trữ";
+            else StorageState = "Đã được mượn"; 
             BookModel.Image = AppDomain.CurrentDomain.BaseDirectory + BookModel.Image;
-            Console.WriteLine(BookModel.Image);
 
         }
     }
