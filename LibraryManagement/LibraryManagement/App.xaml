@@ -22,6 +22,12 @@
             <DataTemplate DataType="{x:Type viewmodels:BookRentalListViewModel}">
                 <views:BookRentalList></views:BookRentalList>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BookRentalDetailViewModel}">
+                <views:BookRentalDetail></views:BookRentalDetail>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddBookRentalViewModel}">
+                <views:AddBookRental></views:AddBookRental>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

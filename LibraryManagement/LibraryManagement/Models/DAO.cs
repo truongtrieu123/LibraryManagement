@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LibraryManagement.Helper;
+using System.ComponentModel;
 
 namespace LibraryManagement.Models
 {
@@ -29,7 +30,7 @@ namespace LibraryManagement.Models
         }
 
 
-        #region Book
+        #region Book Services
         public bool UpdateBookInfoByID(Book updateInfo, long ID)
         {
             bool check = true;
@@ -67,6 +68,10 @@ namespace LibraryManagement.Models
             return ID;
         }
 
+        /// <summary>
+        /// Get all books and convert to BookModel type
+        /// </summary>
+        /// <returns></returns>
         public List<BookModel> GetBooks()
         {
             var bookslist = Database.Books.Join(
@@ -86,6 +91,15 @@ namespace LibraryManagement.Models
                     CatName = c.Name
                 }).ToList();
             return bookslist;
+        }
+
+        /// <summary>
+        /// Get BookList with StorageState=True
+        /// </summary>
+        /// <returns></returns>
+        public List<Book> GetNativeBooks()
+        {
+            return Database.Books.Where(r=>r.StorageState==true).ToList();
         }
 
         public void UpdateBookImageByID(long ID, string ImageSource)
@@ -154,11 +168,37 @@ namespace LibraryManagement.Models
             return res;
         }
 
+        public void SetStorageStateInBook(List<Book > bookList, bool state)
+        {
+            foreach(var i in bookList)
+            {
+                var cur = Database.Books.Where(r => r.ID == i.ID).SingleOrDefault();
+                cur.StorageState = state;
+                Database.SaveChanges();
+            }
+            Database.SaveChanges();
+        }
+
+        /// <summary>
+        /// Set storage state
+        /// Applied for AddBookRental ViewModel
+        /// </summary>
+        /// <param name="bookList"></param>
+        /// <param name="state"></param>
+        public void SetStorageStateInBook(BindingList<Book> bookList, bool state)
+        {
+            foreach(var i in bookList)
+            {
+                Book cur = Database.Books.Where(r => r.ID == i.ID).SingleOrDefault();
+                cur.StorageState = state;
+            }
+            Database.SaveChanges();
+        }
 
         #endregion Book
 
 
-        #region Category
+        #region Category Services
         public List<Category> GetCategories()
         {
             var Categories = Database.Categories.ToList();
@@ -186,7 +226,7 @@ namespace LibraryManagement.Models
         #endregion Category
 
 
-        #region  Reader
+        #region  Reader Services
         public List<Reader> GetReaderList()
         {
             var readerlist = Database.Readers.ToList();
@@ -241,7 +281,7 @@ namespace LibraryManagement.Models
         #endregion Reader
 
 
-        #region BookRentalHistory
+        #region BookRentalHistory Services
         public List<BookRentalHitoryModel> GetBookRentalHitories()
         {
             List<BookRentalHitoryModel> BookRentalHitoryList = Database.BookRentalHitories.Join
@@ -317,10 +357,106 @@ namespace LibraryManagement.Models
 
             return res;
         }
+
+        public Reader GetReaderInfoByBookRentalID(long bookRentalId)
+        {
+            var cur = (from brh in Database.BookRentalHitories
+                          join r in Database.Readers
+                          on brh.ReaderID equals r.ID
+                          select new { ReaderID = r.ID, ID = brh.ID })
+                             .Where(r => r.ID == bookRentalId)
+                            .SingleOrDefault();
+            Reader res = GetReaderInfoById(cur.ReaderID);
+            return res;
+        }
+
+        public BookRentalHitory GetBookRentalHistoryByID(long BookRentalID)
+        {
+            BookRentalHitory res = Database.BookRentalHitories.Where(r => r.ID == BookRentalID).SingleOrDefault();
+            return res;
+        }
+
+        public void SetStateInBookRental(long BookRentalID, bool state)
+        {
+            var cur = Database.BookRentalHitories.Where(r => r.ID == BookRentalID).SingleOrDefault();
+            cur.State = state;
+            Database.SaveChanges();
+        }
+        /// <summary>
+        /// Add BookRentalHitory
+        /// Applied for AddBookRental ViewModel
+        /// </summary>
+        /// <param name="curBookList"></param>
+        /// <returns>ID</returns>
+        public long AddBookRentalHitory(BookRentalHitory curBookList)
+        {
+            long ID = Database.BookRentalHitories.Max(r => r.ID)+1;
+            
+            curBookList.ID = ID;
+            Database.BookRentalHitories.Add(curBookList);
+            Database.SaveChanges();
+
+            return ID;
+        }
+
+        public void SetReturnDateInBookRental(long bookRentalID, DateTime dateTime)
+        {
+            BookRentalHitory cur = Database.BookRentalHitories.Where(r => r.ID == bookRentalID).SingleOrDefault();
+            cur.ReturnDate = dateTime;
+            Database.SaveChanges();
+        }
         #endregion BookRentalHistory
 
 
-        #region Config
+        #region BookRentalList Services
+        /// <summary>
+        /// Add bookList with specified bookRentalID
+        /// Applied for AddBookRental ViewModel
+        /// </summary>
+        /// <param name="bookRentalID"></param>
+        /// <param name="bookList"></param>
+        public void AddBookRentalList(long bookRentalID, BindingList<Book> bookList)
+        {
+            foreach (var i in bookList)
+            {
+                BookRentalList cur = new BookRentalList
+                {
+                    BookID = i.ID,
+                    BookRentalID = bookRentalID,
+                };
+                Database.BookRentalLists.Add(cur);
+            }
+            Database.SaveChanges();
+        }
+
+        public List<Book> GetBookRentalList(long BookRentalID)
+        {
+            List<Book> res = new List<Book>();
+            var bookIDList = Database.BookRentalLists
+                              .Where (o=>o.BookRentalID == BookRentalID)
+                              .ToList();
+            foreach(var i in bookIDList)
+            {
+                Book cur = Database.Books.Where(b => b.ID == i.BookID).SingleOrDefault();
+                res.Add(cur);
+            }
+            return res;
+        }
+
+        public int CurBorrowingBookCountByReaderID(long ReaderID)
+        {
+            int count = 0;
+            List<BookRentalHitory> bookRentalList = Database.BookRentalHitories.Where(r => (r.ReaderID == ReaderID) && (r.State == false)).ToList();
+            foreach(var i in bookRentalList)
+            {
+                int cur = Database.BookRentalLists.Where(r => r.BookRentalID == i.ID).Count();
+                count = count + cur;
+            }
+            return count;
+        }
+        #endregion
+
+        #region Config Services
         public void GetConfigList()
         {
 
@@ -329,6 +465,13 @@ namespace LibraryManagement.Models
         public int PublicationDateTimeInterval()
         {
             Config cur = Database.Configs.Where(c => c.Name == "KhoangCachNamXuatBan").SingleOrDefault();
+
+            return int.Parse(cur.Value);
+        }
+
+        public int MaxBrowwedBookCount()
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "SoLuongSachDuocMuonToiDa").SingleOrDefault();
 
             return int.Parse(cur.Value);
         }
@@ -345,7 +488,7 @@ namespace LibraryManagement.Models
         #endregion Config
 
 
-        #region StoredBook
+        #region StoredBook Services
         #endregion StoredBook
     }
 }
