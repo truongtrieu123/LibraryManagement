@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:LibraryManagement"
         mc:Ignorable="d"
         Height="700" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
-        Loaded="Window_Loaded"
+        Loaded="Window_Loaded" Background="AliceBlue"
         >
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
@@ -143,7 +143,7 @@
                                         Height="60" Padding="0" Width="200" 
                                         HorizontalContentAlignment="Left"
                                         Command="{Binding UpdateView}"
-                                        CommandParameter="Category"
+                                        CommandParameter="CategoryList"
                                         Click="Category_Click" 
                                         Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >

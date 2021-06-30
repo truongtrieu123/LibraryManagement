@@ -106,6 +106,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="DataAccess\BookRentalHitoryModel.cs" />
+    <Compile Include="DataAccess\CategoryModel.cs" />
     <Compile Include="DataAccess\ReaderModel.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateMainViewCommand.cs" />
@@ -157,11 +158,17 @@
     <Compile Include="ViewModels\BookRentalDetailViewModel.cs" />
     <Compile Include="ViewModels\BookRentalListViewModel.cs" />
     <Compile Include="ViewModels\BooksListViewModel.cs" />
+    <Compile Include="ViewModels\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CategoryListViewModel.cs" />
     <Compile Include="ViewModels\EditBookViewModel.cs" />
+    <Compile Include="ViewModels\EditCategoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ReaderListViewModel.cs" />
     <Compile Include="Views\AddBookRental.xaml.cs">
       <DependentUpon>AddBookRental.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddCategory.xaml.cs">
+      <DependentUpon>AddCategory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddNewBook.xaml.cs">
       <DependentUpon>AddNewBook.xaml</DependentUpon>
@@ -188,6 +195,9 @@
     <Compile Include="Views\CategoryList.xaml.cs">
       <DependentUpon>CategoryList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditCategory.xaml.cs">
+      <DependentUpon>EditCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -198,6 +208,10 @@
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddBookRental.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CategoryList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

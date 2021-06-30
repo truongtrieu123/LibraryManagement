@@ -205,14 +205,42 @@ namespace LibraryManagement.Models
             return Categories;
         }
 
+
+        /// <summary>
+        /// Get Category Model List
+        /// Applied for CategoryList ViewModel 
+        /// </summary>
+        /// <returns></returns>
+        public List<CategoryModel> GetCategoriesModel()
+        {
+            List<Category> categories = Database.Categories.ToList();
+            List<CategoryModel> res = new List<CategoryModel>();
+            foreach(var i in categories)
+            {
+                CategoryModel cur = new CategoryModel
+                {
+                    ID = i.ID,
+                    Name = i.Name,
+                    Count = Database.Books.Where(r => r.CatID == i.ID).Count(),
+                };
+                res.Add(cur);
+            }
+            return res;
+        }
+
         public void AddNewCategory(Category catInfo)
         {
+            long ID = Database.Categories.Max(r => r.ID)+1;
+            catInfo.ID = ID;
             Database.Categories.Add(catInfo);
             Database.SaveChanges();
         }
 
-        public void UpdateCategoryName(string text)
+        public void UpdateCategoryName(long catID, string text)
         {
+            Category cur = Database.Categories.Where(r => r.ID == catID).SingleOrDefault();
+            cur.Name = text;
+            
             Database.SaveChanges();
         }
 

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:LibraryManagement"
             xmlns:views="clr-namespace:LibraryManagement.Views"
             xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels"
-             Startup="Application_Startup">
+             Startup="Application_Startup" >
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type viewmodels:AddNewBookViewModel}">
@@ -27,6 +27,15 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:AddBookRentalViewModel}">
                 <views:AddBookRental></views:AddBookRental>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CategoryListViewModel}">
+                <views:CategoryList></views:CategoryList>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:AddCategoryViewModel}">
+                <views:AddCategory></views:AddCategory>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditCategoryViewModel}">
+                <views:EditCategory></views:EditCategory>
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
