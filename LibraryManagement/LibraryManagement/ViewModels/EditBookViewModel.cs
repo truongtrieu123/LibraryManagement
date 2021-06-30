@@ -208,8 +208,14 @@ namespace LibraryManagement.ViewModels
             if (message == null)
             {
                 cur = this.GetBookInfoFromGUI();
+                Console.WriteLine(ImageSource);
+                Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + cur.Image);
 
-                string SourcePath = ReplaceOldImageByNewImage(ID);
+                if(ImageSource!=AppDomain.CurrentDomain.BaseDirectory+ cur.Image)
+                {
+                    string SourcePath = ReplaceOldImageByNewImage(ID);
+                }
+
                 _DAO.UpdateBookInfoByID(cur, this.ID);
                 MessageBox.Show("Thay đổi thông tin thành công", "Thông báo", MessageBoxButton.OK);
                 mainViewModel.SelectedViewModel = new BooksListViewModel(mainViewModel);
