@@ -160,6 +160,8 @@
     <Compile Include="ViewModels\BooksListViewModel.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoryListViewModel.cs" />
+    <Compile Include="ViewModels\ChartPageViewModel.cs" />
+    <Compile Include="ViewModels\ConfigListViewModel.cs" />
     <Compile Include="ViewModels\EditBookViewModel.cs" />
     <Compile Include="ViewModels\EditCategoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -188,6 +190,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\ChartPage.xaml.cs">
+      <DependentUpon>ChartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConfigList.xaml.cs">
+      <DependentUpon>ConfigList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditBook.xaml.cs">
       <DependentUpon>EditBook.xaml</DependentUpon>
@@ -232,6 +240,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BooksList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConfigList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -57,6 +57,14 @@ namespace LibraryManagement.Commands
             {
                 viewModel.SelectedViewModel = new AddCategoryViewModel(viewModel);
             }
+            else if (parameter.ToString() == "ConfigList")
+            {
+                viewModel.SelectedViewModel = new ConfigListViewModel(viewModel);
+            }
+            else if(parameter.ToString()=="ChartPage")
+            {
+                viewModel.SelectedViewModel = new ChartPageViewModel(viewModel);
+            }
         }
     }
 }

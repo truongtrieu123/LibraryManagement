@@ -485,15 +485,31 @@ namespace LibraryManagement.Models
         #endregion
 
         #region Config Services
-        public void GetConfigList()
-        {
-
-        }
 
         public int PublicationDateTimeInterval()
         {
             Config cur = Database.Configs.Where(c => c.Name == "KhoangCachNamXuatBan").SingleOrDefault();
 
+            return int.Parse(cur.Value);
+        }
+
+        public int MaximumBorrowedTimeInterval()
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "SoNgayMuonToiDa").SingleOrDefault();
+
+            return int.Parse(cur.Value);
+        }
+
+        public int CardPeriod()
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "ThoiHanThe").SingleOrDefault();
+
+            return int.Parse(cur.Value);
+        }
+
+        public int AgeLimit()
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "TuoiToiThieu").SingleOrDefault();
             return int.Parse(cur.Value);
         }
 
@@ -504,19 +520,110 @@ namespace LibraryManagement.Models
             return int.Parse(cur.Value);
         }
 
-        public void UpdateConfig()
+        public void  UpdatePublicationDateTimeInterval(string value)
         {
-
+            Config cur = Database.Configs.Where(c => c.Name == "KhoangCachNamXuatBan").SingleOrDefault();
+            if (value != "0" && value != null && value != "" && value.Count() < 3)
+                cur.Value = value;
+            Database.SaveChanges();
         }
 
-        public void AddNewCondif()
+        public void UpdateMaximumBorrowedTimeInterval(string value)
         {
+            Config cur = Database.Configs.Where(c => c.Name == "SoNgayMuonToiDa").SingleOrDefault();
+            if (value != "0" && value != null && value != "" && value.Count() < 3)
+                cur.Value = value;
+            Database.SaveChanges();
+        }
 
+        public void UpdateCardPeriod(string value)
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "ThoiHanThe").SingleOrDefault();
+            if (value != "0" && value != null && value != "" && value.Count() < 3)
+                cur.Value = value;
+            Database.SaveChanges();
+        }
+
+        public void UpdateAgeLimit(string value)
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "TuoiToiThieu").SingleOrDefault();
+            if (value != "0" && value != null && value != "" && value.Count() < 3)
+                cur.Value = value;
+            Database.SaveChanges();
+        }
+
+        public void UpdateMaxBrowwedBookCount(string value)
+        {
+            Config cur = Database.Configs.Where(c => c.Name == "SoLuongSachDuocMuonToiDa").SingleOrDefault();
+            if (value != "0" && value != null && value != "" && value.Count() < 3)
+                cur.Value = value;
+            Database.SaveChanges();
         }
         #endregion Config
 
 
-        #region StoredBook Services
-        #endregion StoredBook
+        #region Report Services
+        public List<int> GetBookRentalDataByMonth(int year)
+        {
+            List<int> data = new List<int>();
+            List<BookRentalHitory> bookRentalHitories = Database.BookRentalHitories.Where(r=>r.CreatedDate.Year==year).ToList();
+            for (int i = 0; i < 12; ++i)
+                data.Add(0);
+
+            int month = 0;
+            foreach(var cur in bookRentalHitories)
+            {
+                month = cur.CreatedDate.Month;
+                data[month - 1] += 1;
+            }
+            return data;
+        }
+
+        public List<(string,int)> GetCategoryDataByYear(int year)
+        {
+            List<(string, int)> data = new List<(string, int)>();
+            var temp = (from brh in Database.BookRentalHitories
+                        join brl in Database.BookRentalLists
+                        on brh.ID equals brl.BookRentalID
+                        join book in Database.Books
+                        on brl.BookID equals book.ID
+                        join cat in Database.Categories
+                        on book.CatID equals cat.ID
+                        select cat)
+                        .GroupBy(r => r.ID)
+                        .Select(
+                            g => new
+                            {
+                                ID = g.Select(r => r.ID).FirstOrDefault(),
+                                Count = g.Select(r => r.Name).Count(),
+                            }
+                        )
+                        .ToList();
+            foreach(var cur in temp)
+            {
+                string catName = Database.Categories.Where(r => r.ID == cur.ID).SingleOrDefault().Name;
+                data.Add((catName, cur.Count));
+            }
+
+            return data;
+        }
+
+        public List<int> GetRegisteredReaderDataByMonth(int year)
+        {
+            List<int> data = new List<int>();
+            List<Reader> readers = Database.Readers.Where(r => r.CreatedDate.Year == year).ToList();
+            for (int i = 0; i < 12; ++i)
+                data.Add(0);
+
+            int month = 0;
+            foreach (var cur in readers)
+            {
+                month = cur.CreatedDate.Month;
+                data[month - 1] += 1;
+            }
+            return data;
+        }
+
+        #endregion Report Services
     }
 }
