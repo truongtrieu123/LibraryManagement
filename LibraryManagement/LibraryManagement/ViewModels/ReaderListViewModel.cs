@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModels
 {
-    class ReaderListViewModel : BaseViewModel
+    public class ReaderListViewModel : BaseViewModel
     {
         public List<Reader> ReaderList { get; set; }
         public DAO _DAO = new DAO();

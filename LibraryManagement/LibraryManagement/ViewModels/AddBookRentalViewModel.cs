@@ -147,7 +147,7 @@ namespace LibraryManagement.ViewModels
                 if (CurBorrowingBookCount == 0)
                     message = $"Chỉ được mượn tối đa {MaxBorrowedBookCount} quyển.\n Số sách hiện tại {BookListDataGrid.Count()}";
                 else
-                    message = $"Chỉ được mượn thêm {MaxBorrowedBookCount - CurBorrowingBookCount} quyển.\nSố sách đã mượn {CurBorrowingBookCount}.\nSố sách hiện tại {BookListDataGrid.Count()}.";
+                    message = $"Chỉ được mượn thêm {MaxBorrowedBookCount} quyển.\nSố sách đã mượn {CurBorrowingBookCount}.\nSố sách hiện tại {BookListDataGrid.Count()}.";
             }
             else if (BookListDataGrid.Count() == 0)
                 message = "Bạn chưa chọn sách";
