@@ -215,7 +215,7 @@
                 </Grid>
                 <ContentControl Content="{Binding SelectedViewModel}"
                                 DockPanel.Dock="Right" 
-                                Height="630" Width="1100" Margin="0" >
+                                Height="645" Width="1150" Margin="0" >
 
                 </ContentControl>
             </DockPanel>

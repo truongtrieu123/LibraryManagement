@@ -83,6 +83,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\AddBookRentalViewModel.cs" />
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -166,6 +168,9 @@
     <Compile Include="ViewModels\EditCategoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ReaderListViewModel.cs" />
+    <Compile Include="Views\AboutUs.xaml.cs">
+      <DependentUpon>AboutUs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddBookRental.xaml.cs">
       <DependentUpon>AddBookRental.xaml</DependentUpon>
     </Compile>
@@ -215,6 +220,10 @@
     <Compile Include="Views\Setting.xaml.cs">
       <DependentUpon>Setting.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AboutUs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddBookRental.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,10 +331,13 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Data\Images\BookImages\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Data\Images\Background\AboutBackground.jpg" />
+    <Resource Include="Data\Images\Background\CareerPromotion.png" />
+    <Resource Include="Data\Images\Background\SplashScreenBackground.jpg" />
+    <Resource Include="Data\Images\Background\0096.png" />
+    <Resource Include="Data\Images\Background\0622.jpg" />
     <Content Include="Models\LibraryManagementEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>

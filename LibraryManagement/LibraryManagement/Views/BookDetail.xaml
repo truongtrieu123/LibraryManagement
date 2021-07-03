@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagement.Views"
         mc:Ignorable="d"
+        Background="AliceBlue"
         Title="{Binding Title}" Height="450" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <DockPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Label DockPanel.Dock="Top" 

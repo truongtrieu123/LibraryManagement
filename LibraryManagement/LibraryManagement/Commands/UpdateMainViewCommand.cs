@@ -65,6 +65,10 @@ namespace LibraryManagement.Commands
             {
                 viewModel.SelectedViewModel = new ChartPageViewModel(viewModel);
             }
+            else if (parameter.ToString()=="AboutUs")
+            {
+                viewModel.SelectedViewModel = new AboutUsViewModel(viewModel);
+            }
         }
     }
 }
