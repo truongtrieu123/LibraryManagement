@@ -59,7 +59,7 @@
                 </Grid>
                 <Grid x:Name="GridMenu" DockPanel.Dock="Left" Width="47" Background="MediumVioletRed"  HorizontalAlignment="Left"  >
 
-                    <StackPanel x:Name="menuStackPanel">
+                    <StackPanel x:Name="menuStackPanel" Visibility="Visible">
                         <Border Height="40" Margin="0" >
                             <Grid >
                                 <Button x:Name="closeMenuButton"  Width="60" Height="50"  HorizontalAlignment="Right"  VerticalAlignment="Center"
@@ -199,7 +199,7 @@
                                         CommandParameter="AboutUs"
                                         Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
-                                        <materialDesign:PackIcon Kind="About" Width="35" Height="35" Foreground="White" Background="Transparent" VerticalAlignment="Center" Margin="5">
+                                        <materialDesign:PackIcon Kind="About" Width="35" Height="36" Foreground="White" Background="Transparent" VerticalAlignment="Top" Margin="5,12,5,0">
                                             <materialDesign:PackIcon.ToolTip>
                                                 <TextBlock x:Name="AboutUs" Text="Về chúng tôi"></TextBlock>
                                             </materialDesign:PackIcon.ToolTip>

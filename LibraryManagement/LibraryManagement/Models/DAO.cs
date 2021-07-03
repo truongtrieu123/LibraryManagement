@@ -130,40 +130,55 @@ namespace LibraryManagement.Models
             return res;
         }
 
-        public List<BookModel> SearchBookName(string text)
+        public List<BookModel> SearchBookName(string text, long CatID)
         {
-            string normalizedText = HelperFunctions.RemovedUTF(text.ToLower());
-            List<Book> booksList = Database.Books.Where(delegate (Book b)
-            {
-                if (HelperFunctions.RemovedUTF(b.Name.ToLower()).Contains(normalizedText))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }).ToList();
+            //Eliminate punctuation and toLower text
+            string normalizedText = "";
+            if (text != null)
+                normalizedText = HelperFunctions.RemovedUTF(text.ToLower());
 
-            List<BookModel> res = new List<BookModel>();
-            foreach (var i in booksList)
+            //Get all items list
+            IQueryable<BookModel> bookModelList = (from cat in Database.Categories
+                                                    join b in Database.Books
+                                                    on cat.ID equals b.CatID
+                                                    select new BookModel
+                                                    {
+                                                        ID =b.ID,
+                                                        Name=b.Name,
+                                                        CatID =b.CatID,
+                                                        Author =b.Author,
+                                                        PublicationDate =b.PublicationDate,
+                                                        ImportDate = b.ImportDate,
+                                                        StorageState =b.StorageState,
+                                                        Location =b.Location,
+                                                        PublishingCompany = b.PublishingCompany,
+                                                        Image = b.Image,
+                                                        CatName = cat.Name,
+                                                    });
+
+            //Search text name 
+            IQueryable<BookModel> searchedList = bookModelList;
+            if (normalizedText != null || normalizedText != "")
             {
-                BookModel cur = new BookModel
+                searchedList = bookModelList.Where(delegate (BookModel r)
                 {
-                    ID = i.ID,
-                    Name = i.Name,
-                    Author = i.Author,
-                    CatID = i.CatID,
-                    PublicationDate = i.PublicationDate,
-                    PublishingCompany = i.PublishingCompany,
-                    Image = i.Image,
-                    ImportDate = i.ImportDate,
-                    StorageState = i.StorageState,
-                    Location = i.Location,
-                    CatName = Database.Categories.Where(c => c.ID == i.CatID).SingleOrDefault().Name.ToString(),
-                };
-                res.Add(cur);
+                    if (HelperFunctions.RemovedUTF(r.Name.ToLower()).Contains(normalizedText)
+                    || (r.ID.ToString().Contains(normalizedText)))
+                        return true;
+                    else return false;
+                }).AsQueryable();
             }
+
+            //Categorize items
+            List<BookModel> res = new List<BookModel>();
+            IQueryable<BookModel> categorizedList = searchedList;
+            if (CatID != 0)
+            {
+                //Take all category-related items
+                res = categorizedList.Where(r => r.CatID == CatID).ToList();
+            }
+            else res = categorizedList.ToList();
+            
 
             return res;
         }

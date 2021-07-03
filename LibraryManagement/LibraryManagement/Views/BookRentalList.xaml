@@ -43,11 +43,12 @@
                                VerticalAlignment="Center"></materialDesign:PackIcon>
                         </Button.Content>
                     </Button>
-                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm phiếu mượn" 
+                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm phiếu mượn hoặc tên độc giả" 
                              x:Name="SearchingTextBox"
                              ToolTip="Nhập mã phiếu mượn hoặc tên độc giả"
                              materialDesign:HintAssist.Foreground="#AAAAAA" 
-                             FontSize="21" Height="45" Width="450"
+                             FontSize="21" 
+                             Margin="15,0,0,5"
                              Text="{Binding SearchingText, Mode=TwoWay}"
                              TextChanged="TextBox_TextChanged"
                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center">

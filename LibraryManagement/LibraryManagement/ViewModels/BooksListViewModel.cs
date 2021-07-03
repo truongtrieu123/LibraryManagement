@@ -11,6 +11,7 @@ using LibraryManagement.Views;
 
 namespace LibraryManagement.ViewModels
 {
+
     public class BooksListViewModel : BaseViewModel
     {
         private List<BookModel> _bookList;
@@ -39,6 +40,7 @@ namespace LibraryManagement.ViewModels
                 OnPropertyChanged(MySearchingText);
             }
         }
+
         public DAO _DAO = new DAO();
         public MainViewModel mainViewModel;
         public ICommand UpdateView { get; set; }
@@ -46,6 +48,29 @@ namespace LibraryManagement.ViewModels
         public ICommand EditBook { get; set; }
         public ICommand SearchBookName { get; set; }
         public ICommand RefreshPage { get; set; }
+        public ICommand SelectionChanged { get; set; }
+
+        private List<Category> categoryList;
+        public List<Category> CategoryList
+        {
+            get { return categoryList; }
+            set
+            {
+                categoryList = value;
+                OnPropertyChanged(nameof(CategoryList));
+            }
+        }
+
+        private int selectedCategory;
+        public int SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
 
         public BooksListViewModel()
         {
@@ -64,6 +89,11 @@ namespace LibraryManagement.ViewModels
             EditBook = new RelayCommand(o => EditBookInfo(o));
             SearchBookName = new RelayCommand(o => SearchBooksName(o));
             RefreshPage = new RelayCommand(o => RefreshEntirePage());
+            SelectionChanged = new RelayCommand(o => SelectedChanged_Click(o));
+
+            SelectedCategory = -1;
+            CategoryList = _DAO.GetCategories();
+            CategoryList.Insert(0, new Category { ID = 0, Name = "Tất cả" });
         }
 
         public void RefreshEntirePage()
@@ -73,15 +103,18 @@ namespace LibraryManagement.ViewModels
 
         public void SearchBooksName(object parameter)
         {
-            string text = parameter.ToString();
-            List<BookModel> res;
-            if (text == null || text == "")
-                res = _DAO.GetBooks();
-            else
-                res = _DAO.SearchBookName(text);
-            BooksList = res;
-            Console.WriteLine(res.Count());
+            string searchingText = parameter.ToString();
+            long CatID = CategoryList[SelectedCategory].ID;
+            BooksList = _DAO.SearchBookName(searchingText, CatID);
         }
+
+        public void SelectedChanged_Click(object parameter)
+        {
+            string searchingText = parameter.ToString();
+            long CatID =CategoryList[SelectedCategory].ID;
+            BooksList = _DAO.SearchBookName(searchingText, CatID);
+        }
+
         public void ShowBookDetail(object parameter)
         {
             long ID = long.Parse(parameter.ToString());

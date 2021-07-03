@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BooksListViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodels:BooksListViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="630" d:DesignWidth="1100"
              Background="AliceBlue"
@@ -13,50 +13,95 @@
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
      FontFamily="{DynamicResource MaterialDesignFont}" >
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Border BorderBrush="DarkBlue" BorderThickness="2" CornerRadius="10" Margin="10">
-                <StackPanel Orientation="Horizontal" Width="750" Height="50" >
-                    <TextBox x:Name="SearchingContent"
-                            materialDesign:HintAssist.Hint="Tìm kiếm ở đây"  Margin="20,0,0,5" FontSize="25" 
-                            VerticalContentAlignment="Center" Width="680" 
-                            Text="{Binding MySearchingText,Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged"
-                            >
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding SearchBookName}"
-                            CommandParameter="{Binding Path=Text, ElementName=SearchingContent}"></KeyBinding>
-                        </TextBox.InputBindings>
-                    </TextBox>
-                    <Button Background="AliceBlue"  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.4*"/>
+                <ColumnDefinition Width="1.2*"/>
+
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" BorderBrush="#007ABE" BorderThickness="2" CornerRadius="10" Margin="10">
+                <DockPanel >
+                    <Button DockPanel.Dock="Right"
+                            Background="AliceBlue"  
                             Width="40" Height="40" 
-                            Padding="0" 
-                            Foreground="Black" 
+                            Padding="0" HorizontalAlignment="Right"
+                            Foreground="#CACACA" 
                             BorderBrush="Transparent" 
                             ToolTip="Tìm kiếm"
                             Command="{Binding SearchBookName}"
-                            CommandParameter="{Binding Path=Text, ElementName=SearchingContent}"
+                            CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"
                             Style="{StaticResource MaterialDesignFlatAccentButton}">
                         <Button.Content>
                             <materialDesign:PackIcon Kind="Search" Width="40" Height="40" Background="Transparent"                    
                                VerticalAlignment="Center"></materialDesign:PackIcon>
                         </Button.Content>
                     </Button>
-                </StackPanel>
-            </Border>
-            <Button  Padding="0" Width="200" Height="52" 
+                    <TextBox x:Name="SearchingTextBox"
+                            DockPanel.Dock="Left"
+                            materialDesign:HintAssist.Hint="Tìm kiếm tên sách hoặc mã sách" 
+                            ToolTip="Nhập tên sách hoặc mã sách"
+                            materialDesign:HintAssist.Foreground="#AAAAAA" 
+                            Margin="15,0,5,5" FontSize="21" 
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center" 
+                            Text="{Binding MySearchingText,Mode=TwoWay}"
+                            TextChanged="TextBox_TextChanged">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding SearchBookName}"
+                            CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"></KeyBinding>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        
+                    </DockPanel>
+                </Border>
+                <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+                    <ComboBox  Background="Transparent" Foreground="#0066FF" 
+                           FontFamily="Roboto" BorderBrush="Transparent" 
+                           BorderThickness="0" 
+                           Margin="5,0,5,5"
+                           Padding="10,0,5,0" Height="52" VerticalContentAlignment="Center"
+                           Style="{StaticResource MaterialDesignFilledComboBox}"
+                           ItemsSource="{Binding CategoryList}"
+                           SelectedIndex="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}"
+                           VerticalAlignment="Bottom">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"  FontFamily="Roboto" FontSize="21" FontWeight="Bold" TextWrapping="Wrap" Width="230"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+
+                    </ComboBox>
+                </Border>
+            <Border Grid.Column="2" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+                <Button  Padding="0" Height="Auto"
                     ToolTip="Thêm sách mới"  VerticalContentAlignment="Center" 
                     Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                     BorderBrush="Transparent"
+                     Background="Transparent"
                      Command="{Binding UpdateView}"
                      CommandParameter="AddNewBook">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="BookAdd" Foreground="Black" Width="40" Height="40"></materialDesign:PackIcon>
-                        <Label FontSize="23" FontWeight="ExtraBold" Foreground="Black">Thêm mới</Label>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
-            <Button Margin="30,0,0,0"
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Add" Foreground="#007ABE" VerticalContentAlignment="Center"
+                                                     Width="40" Height="Auto"></materialDesign:PackIcon>
+                            <Label FontSize="23" FontWeight="Bold" Foreground="#007ABE" VerticalAlignment="Center">Thêm sách mới</Label>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+            
+            <!--<Button Margin="30,0,0,0"
                     Padding="0" Width="50" Height="52"  
                     VerticalContentAlignment="Center" 
                     Style="{StaticResource MaterialDesignFlatMidBgButton}"
@@ -64,10 +109,11 @@
                 <Button.Content>
                     <materialDesign:PackIcon Kind="Refresh" Foreground="Black" Width="40" Height="40"></materialDesign:PackIcon>
                 </Button.Content>
-            </Button>
-        </StackPanel>
+            </Button>-->
+        </Grid>
+        
 
-        <StackPanel DockPanel.Dock="Bottom">
+        <StackPanel Grid.Row="1">
 
             <DataGrid x:Name="BooksListDatagrid" IsReadOnly="True" 
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
@@ -148,5 +194,5 @@
 
             </DataGrid>
         </StackPanel>
-    </DockPanel>
+    </Grid>
 </UserControl>
