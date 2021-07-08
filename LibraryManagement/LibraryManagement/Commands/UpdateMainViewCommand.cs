@@ -49,6 +49,30 @@ namespace LibraryManagement.Commands
             {
                 viewModel.SelectedViewModel = new BookRentalListViewModel(viewModel);
             }
+            else if(parameter.ToString()=="AddBookRental")
+            {
+                viewModel.SelectedViewModel = new AddBookRentalViewModel(viewModel);
+            }
+            else if(parameter.ToString()== "CategoryList")
+            {
+                viewModel.SelectedViewModel = new CategoryListViewModel(viewModel);
+            }
+            else if (parameter.ToString() == "AddCategory")
+            {
+                viewModel.SelectedViewModel = new AddCategoryViewModel(viewModel);
+            }
+            else if (parameter.ToString() == "ConfigList")
+            {
+                viewModel.SelectedViewModel = new ConfigListViewModel(viewModel);
+            }
+            else if(parameter.ToString()=="ChartPage")
+            {
+                viewModel.SelectedViewModel = new ChartPageViewModel(viewModel);
+            }
+            else if (parameter.ToString()=="AboutUs")
+            {
+                viewModel.SelectedViewModel = new AboutUsViewModel(viewModel);
+            }
         }
     }
 }

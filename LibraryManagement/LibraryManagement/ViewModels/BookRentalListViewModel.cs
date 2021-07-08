@@ -31,7 +31,7 @@ namespace LibraryManagement.ViewModels
         public ICommand BookRentalDetail { get; set; }
         public ICommand SearchBookRental { get; set; }
         public ICommand SelectedStateChanged { get; set; }
-
+        public ICommand EditBookRentalInfo { get; set; }
         public List<BookRentalHitoryModel> _bookRentalList;
         public List<BookRentalHitoryModel> BookRentalList
         {
@@ -75,13 +75,18 @@ namespace LibraryManagement.ViewModels
             BookRentalList = _DAO.GetBookRentalHitories();
             SearchBookRental = new RelayCommand(o => SearchBookRentalName(o));
             SelectedStateChanged = new RelayCommand(o => SelectedStateChanged_Click(o));
-
+            EditBookRentalInfo = new RelayCommand(o => EditBookRetalInfo_click(o));
             SelectedState = 0;
             StateCategoryList = BookRentalStateViewModel.StateCategoryList;
             SearchingText = null;
         }
 
-        
+        public void EditBookRetalInfo_click(object parameter)
+        {
+            long ID = long.Parse(parameter.ToString());
+            mainViewModel.SelectedViewModel = new BookRentalDetailViewModel(mainViewModel, ID);
+               
+        }
 
         public void SearchBookRentalName(object parameter)
         {

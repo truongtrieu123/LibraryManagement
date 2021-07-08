@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LibraryManagement.Views
@@ -17,7 +18,7 @@ namespace LibraryManagement.Views
     /// <summary>
     /// Interaction logic for AddBookRental.xaml
     /// </summary>
-    public partial class AddBookRental : Window
+    public partial class AddBookRental : UserControl
     {
         public AddBookRental()
         {

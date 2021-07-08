@@ -135,39 +135,5 @@ namespace LibraryManagement.Views
             }
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BookList_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void RentABook_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Reader_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Category_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AboutUs_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BorrowBook_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
