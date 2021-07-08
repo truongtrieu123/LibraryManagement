@@ -113,45 +113,6 @@
     <Compile Include="Commands\UpdateMainViewCommand.cs" />
     <Compile Include="DataAccess\BookModel.cs" />
     <Compile Include="Helper\HelperFunctions.cs" />
-    <Compile Include="Models\Book.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BookRentalHitory.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BookRentalList.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Config.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LibraryManagementEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagementEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LibraryManagementEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LibraryManagementEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Reader.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StoredBook.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>LibraryManagementEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\AboutUsViewModel.cs" />
     <Compile Include="ViewModels\AddBookRentalViewModel.cs" />
     <Compile Include="ViewModels\AddNewBookViewModel.cs" />
@@ -312,13 +273,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\LibraryManagementEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LibraryManagementEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\LibraryManagementEntities.edmx.diagram">
-      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -346,16 +300,6 @@
     <Resource Include="Data\Images\Background\SplashScreenBackground.jpg" />
     <Resource Include="Data\Images\Background\0096.png" />
     <Resource Include="Data\Images\Background\0622.jpg" />
-    <Content Include="Models\LibraryManagementEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
-      <LastGenOutput>LibraryManagementEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\LibraryManagementEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LibraryManagementEntities.edmx</DependentUpon>
-      <LastGenOutput>LibraryManagementEntities.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
