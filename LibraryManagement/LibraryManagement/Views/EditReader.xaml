@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LibraryManagement.Views.AddReader"
+﻿<UserControl x:Class="LibraryManagement.Views.EditReader"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,13 +16,13 @@
                         Style="{StaticResource MaterialDesignFlatMidBgButton}"  
                         Margin="0" Padding="0"
                         Command="{Binding UpdateView}"
-                        CommandParameter="ReaderList">
+                        CommandParameter="BooksList">
 
                     <Button.Content>
                         <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
                     </Button.Content>
                 </Button>
-                <Label Content="THÊM ĐỘC GIẢ" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" ></Label>
+                <Label Content="Tạo sách mới" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" ></Label>
 
             </DockPanel>
         </StackPanel>
@@ -31,7 +31,7 @@
                     Command="{Binding SaveNewBook}"
                     Foreground="#fff"
                     BorderThickness="0"
-                    Content="Lưu thông tin"  FontSize="30" 
+                    Content="Cập nhật"  FontSize="30" 
                     Style="{StaticResource MaterialDesignFlatMidBgButton}"
                     Height="50"></Button>
 
@@ -64,7 +64,7 @@
         <materialDesign:Card  Margin="30,-0.4,15,0" Height="494" VerticalAlignment="Top">
             <DockPanel DockPanel.Dock="Right" Margin="5" >
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Thông tin chi tiết" HorizontalAlignment="Center" FontSize="30" FontWeight="Normal" />
+                    <TextBlock Text="CẬP NHẬT ĐỘC GIẢ" HorizontalAlignment="Center" FontSize="30" FontWeight="Normal" />
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
@@ -105,7 +105,7 @@
                                      Text="{Binding PublishingCompany}"
                                      >
                             </TextBox>
-                            
+
                         </StackPanel>
 
                         <DatePicker x:Name="PublicationDate"

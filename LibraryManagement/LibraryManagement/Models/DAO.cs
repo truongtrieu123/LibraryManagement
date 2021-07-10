@@ -10,7 +10,7 @@ namespace LibraryManagement.Models
 {
     public class DAO
     {
-        public LibraryMangementEntities Database;
+        public LibraryManagementEntities Database;
 
         /// <summary>
         /// Hàm khởi tạo kết nối cơ sở dữ liệu
@@ -19,7 +19,7 @@ namespace LibraryManagement.Models
         /// <returns></returns>
         public DAO()
         {
-            Database = new LibraryMangementEntities();
+            Database = new LibraryManagementEntities();
         }
         /// <summary>
         /// Hàm cập nhật cơ sở dữ liệu
@@ -276,11 +276,32 @@ namespace LibraryManagement.Models
             return readerlist;
         }
 
+        public ReaderModel GetDetailReaderById(long Id)
+        {
+            var reader = (from r in Database.Readers
+                          where r.ID == Id
+                          select r).SingleOrDefault();
+
+            ReaderModel readerModel = new ReaderModel()
+            {
+                ID = reader.ID,
+                Name = reader.Name,
+                Email = reader.Email,
+                CatID = reader.CatID,
+                CreatedDate = reader.CreatedDate,
+                ExpiryDate = reader.ExpiryDate,
+                Image = reader.Image
+            };
+
+            return readerModel;
+        }
+
         public Reader GetReaderInfoById(long Id)
         {
             var reader = (from r in Database.Readers
                           where r.ID == Id
                           select r).SingleOrDefault();
+
             return reader;
         }
 
@@ -314,12 +335,16 @@ namespace LibraryManagement.Models
             return check;
         }
 
-        public void AddNewReader(Reader info )
+        public void AddNewReader(Reader readerInfo )
         {
-            var reader = Database.Readers;
-            reader.Add(info);
-            Database.SaveChanges();
+            var readers = Database.Readers;
+            long ID = Database.Readers.Max(r=>r.ID);
+            
+            readerInfo.ID = ID + 1;
+            readers.Add(readerInfo);
+            Console.WriteLine(readerInfo.ToString());
 
+            Database.SaveChanges();
         }
         #endregion Reader
 

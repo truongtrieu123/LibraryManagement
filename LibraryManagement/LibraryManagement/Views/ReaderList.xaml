@@ -77,7 +77,7 @@
                                 <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                         Background="LightGray" Width="40" Height="40" Padding="0"
                                         BorderBrush="Transparent" ToolTip="Xem chi tiết"
-                                        Command="{Binding Path=DataContext.ViewBookDetail,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
+                                        Command="{Binding Path=DataContext.ViewReaderDetail,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
                                     <Button.Content>
                                         <materialDesign:PackIcon Kind="Eye" Foreground="DarkOrange" Width="30" Height="30"></materialDesign:PackIcon>
                                     </Button.Content>

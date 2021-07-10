@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.Commands;
 using LibraryManagement.DataAccess;
 using LibraryManagement.Models;
+using LibraryManagement.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace LibraryManagement.ViewModels
         public DAO _DAO = new DAO();
         public MainViewModel mainViewModel;
         public ICommand UpdateView { get; set; }
+        public ICommand ViewReaderDetail { get; set; }
 
         public ReaderListViewModel()
         {
@@ -28,6 +30,16 @@ namespace LibraryManagement.ViewModels
             ReaderList = _DAO.GetReaderList().ToList();
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(mainViewModel);
+            ViewReaderDetail = new RelayCommand(o => ShowReaderDetail(o));
+        }
+
+        public void ShowReaderDetail(object parameter)
+        {
+            long ID = long.Parse(parameter.ToString());
+            Console.WriteLine("ReaderListViewModel");
+            Console.WriteLine(ID);
+            ReaderDetail screen = new ReaderDetail(ID);
+            screen.Show();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagement.DataAccess
 {
-    class ReaderModel
+    public class ReaderModel
     {
         public long ID { get; set; }
         public string Name { get; set; }

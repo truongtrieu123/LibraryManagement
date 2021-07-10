@@ -43,7 +43,7 @@ namespace LibraryManagement.Commands
             }
             else if(parameter.ToString() == "AddReader")
             {
-                //viewModel.SelectedViewModel = new AddReaderViewModel(viewModel);
+                viewModel.SelectedViewModel = new AddReaderViewModel(viewModel);
             }
             else if (parameter.ToString() == "BorrowBook")
             {
