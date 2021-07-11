@@ -32,7 +32,7 @@
 
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10"
-                    CornerRadius="10">
+                    CornerRadius="5">
                 <DockPanel LastChildFill="True" Width="Auto" Height="Auto" >
                     <Button DockPanel.Dock="Right" Width="50" Height="Auto" Padding="0" Foreground="#CACACA" BorderBrush="Transparent" ToolTip="Tìm kiếm"
                             Style="{StaticResource MaterialDesignFlatAccentButton}"
@@ -48,7 +48,6 @@
                              ToolTip="Nhập mã phiếu mượn hoặc tên độc giả"
                              materialDesign:HintAssist.Foreground="#AAAAAA" 
                              FontSize="21" 
-                             Margin="15,0,0,5"
                              Text="{Binding SearchingText, Mode=TwoWay}"
                              TextChanged="TextBox_TextChanged"
                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
@@ -61,7 +60,7 @@
                     </TextBox>
                 </DockPanel>
             </Border>
-            <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+            <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0">
                 <ComboBox  Background="Transparent" Foreground="#0066FF" 
                            FontFamily="Roboto" BorderBrush="Transparent" 
                            BorderThickness="0" 
@@ -77,16 +76,16 @@
                         </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding StateName}" FontFamily="Roboto" FontSize="21" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="{Binding StateName}" FontSize="21" FontWeight="Bold" Foreground="#0066FF" ></TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
 
                 </ComboBox>
             </Border>
-            <Border Grid.Column="2" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="10" Padding="0">
+            <Border Grid.Column="2" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0">
                 <Button x:Name="d" Background="Transparent" 
                         Command="{Binding Path=UpdateView}" CommandParameter="AddBookRental"
-                        Foreground="#0066FF" FontFamily="Roboto" FontSize="20" FontWeight="Bold" BorderThickness="0" Margin="0" Padding="0" Height="Auto">
+                        Foreground="#007ABE" FontFamily="Roboto" FontSize="20" FontWeight="Bold" BorderThickness="0" Margin="0" Padding="0" Height="Auto">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Add" Padding="0" Margin="0" Width="40" Height="Auto"/>
                         <TextBlock VerticalAlignment="Center">Lập phiếu mượn</TextBlock>

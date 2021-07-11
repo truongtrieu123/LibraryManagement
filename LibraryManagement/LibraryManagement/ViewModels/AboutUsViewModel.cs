@@ -51,7 +51,7 @@ namespace LibraryManagement.ViewModels
                 AvatarImage = "/Data/Images/Background/0622.jpg",
                 Job = "Student",
                 Position = "Designer & Deverloper",
-                Gmail = "letrung@gmail.com",
+                Gmail = "letrung02082000@gmail.com",
                 Facebook = "Lê Văn Trung"
             };
             Members.Add(member1);

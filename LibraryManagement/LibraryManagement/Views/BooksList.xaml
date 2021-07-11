@@ -62,14 +62,11 @@
                 </Border>
                 <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0">
                     <ComboBox  Background="Transparent" Foreground="#000"
-                           FontFamily="Roboto" BorderBrush="Transparent" 
+                           BorderBrush="Transparent"
                            BorderThickness="0"
-                           HorizontalAlignment="Center"
-                           VerticalContentAlignment="Center"
                            Style="{StaticResource MaterialDesignFilledComboBox}"
                            ItemsSource="{Binding CategoryList}"
-                           SelectedIndex="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}"
-                           VerticalAlignment="Center">
+                           SelectedIndex="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"/>
@@ -77,7 +74,7 @@
                         </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"  FontFamily="Roboto" FontSize="21" FontWeight="Bold" TextWrapping="Wrap" Width="230"></TextBlock>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="21" Foreground="#007ABE" TextWrapping="Wrap" Width="230"></TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
 

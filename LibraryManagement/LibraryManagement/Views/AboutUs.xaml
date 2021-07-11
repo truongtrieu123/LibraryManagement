@@ -11,7 +11,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Data/Images/Background/AboutBackground.jpg"/>
         </Grid.Background>
-        <Label Content="VỀ CHÚNG TÔI" HorizontalAlignment="Left" Height="40.5" Margin="45,34.5,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold" FontFamily="Rockwell" FontSize="24"/>
+        <Label Content="VỀ CHÚNG TÔI" HorizontalAlignment="Left" Height="401" Margin="45,34.5,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold"  FontSize="25"/>
         <ListView x:Name="MembersListView" Margin="45,80,241,294.5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" FontSize="14" ItemsSource="{Binding Path=Members}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -114,10 +114,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Label Content="VỀ ỨNG DỤNG" HorizontalAlignment="Left" Height="40.5" Margin="196,428.5,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold" FontFamily="Rockwell" FontSize="24"/>
+        <Label Content="VỀ ỨNG DỤNG" HorizontalAlignment="Left" Height="41" Margin="45,435,0,0" VerticalAlignment="Top" Width="263" FontWeight="Bold" FontSize="24"/>
         <TextBlock TextWrapping="Wrap"
                    HorizontalAlignment="Left"   VerticalAlignment="Top"
-                   Width="433" Height="114" Margin="212,469,0,0" FontSize="16" IsEnabled="False"><Run FontWeight="Bold" FontSize="18" Text="Base on:"/><LineBreak/><Run Text="🧡    WPF Application by Dot NET Framework. &#xD;&#xA;🧡    Microsoft SQL Server. &#xD;&#xA;🧡    Github."/></TextBlock>
+                   Width="433" Height="114" Margin="45,475,0,0" FontSize="16" IsEnabled="False"><Run FontWeight="Bold" FontSize="18" Text="Base on:"/><LineBreak/><Run Text="🧡    WPF Application by Dot NET Framework. &#xD;&#xA;🧡    Microsoft SQL Server. &#xD;&#xA;🧡    Github."/></TextBlock>
         <materialDesign:Chip Content="Facebook" Click="TeamContactFb_Click"
             IconBackground="{DynamicResource PrimaryHueDarkBrush}" 
             IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="271.17,593,0,55" ToolTip="Our Facebook">
