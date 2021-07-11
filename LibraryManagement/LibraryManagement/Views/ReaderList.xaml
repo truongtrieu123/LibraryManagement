@@ -93,7 +93,7 @@
                                 <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"  
                                         Background="LightGray" Width="40" Height="40" Padding="0"
                                         BorderBrush="Transparent"  ToolTip="Chỉnh sửa nội dung"
-                                        Command="{Binding Path=DataContext.EditBookInfo,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
+                                        Command="{Binding Path=DataContext.EditReader,RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ID}">
                                     <Button.Content>
                                         <materialDesign:PackIcon Kind="Edit" Foreground="DarkGreen" Width="30" Height="30"></materialDesign:PackIcon>
                                     </Button.Content>

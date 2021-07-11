@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\ConfigListViewModel.cs" />
     <Compile Include="ViewModels\EditBookViewModel.cs" />
     <Compile Include="ViewModels\EditCategoryViewModel.cs" />
+    <Compile Include="ViewModels\EditReaderViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ReaderDetailViewModel.cs" />
     <Compile Include="ViewModels\ReaderListViewModel.cs" />

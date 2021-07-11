@@ -18,6 +18,7 @@ namespace LibraryManagement.ViewModels
         public MainViewModel mainViewModel;
         public ICommand UpdateView { get; set; }
         public ICommand ViewReaderDetail { get; set; }
+        public ICommand EditReader { get; set; }
 
         public ReaderListViewModel()
         {
@@ -31,6 +32,7 @@ namespace LibraryManagement.ViewModels
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(mainViewModel);
             ViewReaderDetail = new RelayCommand(o => ShowReaderDetail(o));
+            EditReader = new RelayCommand(o => EditReaderInfo(o));
         }
 
         public void ShowReaderDetail(object parameter)
@@ -40,6 +42,14 @@ namespace LibraryManagement.ViewModels
             Console.WriteLine(ID);
             ReaderDetail screen = new ReaderDetail(ID);
             screen.Show();
+        }
+
+        public void EditReaderInfo(object parameter)
+        {
+            long ID = long.Parse(parameter.ToString());
+            Console.WriteLine("ReaderListViewModel");
+            Console.WriteLine(ID);
+            mainViewModel.SelectedViewModel = new EditReaderViewModel(mainViewModel, ID);
         }
     }
 }

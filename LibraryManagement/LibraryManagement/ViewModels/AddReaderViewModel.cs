@@ -17,6 +17,62 @@ namespace LibraryManagement.ViewModels
         public ICommand AddImage { get; set; }
         public DAO _DAO { get; set; }
 
+        private string _readerName;
+        public string ReaderName
+        {
+            get { return _readerName; }
+            set
+            {
+                if (value != null)
+                {
+                    _readerName = value;
+                    OnPropertyChanged(nameof(_readerName));
+                }
+            }
+        }
+
+        private DateTime _createDate;
+        public DateTime CreatedDate
+        {
+            get { return _createDate; }
+            set
+            {
+                if (value != null)
+                {
+                    _createDate = value;
+                    OnPropertyChanged(nameof(_createDate));
+                }
+            }
+        }
+
+        private long _categoryID;
+        public long CategoryID
+        {
+            get { return _categoryID; }
+            set
+            {
+                if (value != this._categoryID)
+                {
+                    _categoryID = value;
+                    OnPropertyChanged(nameof(_categoryID));
+                }
+            }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (value != null)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(_email));
+                }
+            }
+        }
+
         public AddReaderViewModel(MainViewModel param)
         {
             _DAO = new DAO();
@@ -29,7 +85,7 @@ namespace LibraryManagement.ViewModels
             //PublicationDateTimeInterval = _DAO.PublicationDateTimeInterval();
 
 
-            //CategoryID = -1;
+            CategoryID = -1;
             //PublicationDate = System.DateTime.Now;
             //ImageSource = null;
         }

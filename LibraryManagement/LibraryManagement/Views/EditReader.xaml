@@ -16,13 +16,13 @@
                         Style="{StaticResource MaterialDesignFlatMidBgButton}"  
                         Margin="0" Padding="0"
                         Command="{Binding UpdateView}"
-                        CommandParameter="BooksList">
+                        CommandParameter="ReaderList">
 
                     <Button.Content>
                         <materialDesign:PackIcon Kind="KeyboardReturn"  Width="100" Height="50"></materialDesign:PackIcon>
                     </Button.Content>
                 </Button>
-                <Label Content="Tạo sách mới" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" ></Label>
+                <Label Content="CẬP NHẬT ĐỘC GIẢ" FontSize="40" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Arial" ></Label>
 
             </DockPanel>
         </StackPanel>
@@ -64,7 +64,7 @@
         <materialDesign:Card  Margin="30,-0.4,15,0" Height="494" VerticalAlignment="Top">
             <DockPanel DockPanel.Dock="Right" Margin="5" >
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="CẬP NHẬT ĐỘC GIẢ" HorizontalAlignment="Center" FontSize="30" FontWeight="Normal" />
+                    <TextBlock Text="Thông tin chi tiết" HorizontalAlignment="Center" FontSize="30" FontWeight="Normal" />
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
