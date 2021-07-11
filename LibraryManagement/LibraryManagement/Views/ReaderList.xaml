@@ -32,8 +32,18 @@
                                VerticalAlignment="Center"></materialDesign:PackIcon>
                         </Button.Content>
                     </Button>
-                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm độc giả" materialDesign:HintAssist.Foreground="#AAAAAA" FontSize="21" 
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    <TextBox x:Name="SearchingTextBox"
+                             materialDesign:HintAssist.Hint="Tìm kiếm độc giả"
+                             materialDesign:HintAssist.Foreground="#AAAAAA" FontSize="21" 
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Text="{Binding MySearchingText,Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SearchReader}"
+                                        CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}">
+                            </KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="0, 10, 100,10" CornerRadius="5" Padding="0">

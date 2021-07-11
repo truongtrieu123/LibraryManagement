@@ -91,7 +91,7 @@ namespace LibraryManagement.ViewModels
             RefreshPage = new RelayCommand(o => RefreshEntirePage());
             SelectionChanged = new RelayCommand(o => SelectedChanged_Click(o));
 
-            SelectedCategory = -1;
+            SelectedCategory = 0;
             CategoryList = _DAO.GetCategories();
             CategoryList.Insert(0, new Category { ID = 0, Name = "Tất cả" });
         }

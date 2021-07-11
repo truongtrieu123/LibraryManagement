@@ -12,11 +12,33 @@ namespace LibraryManagement.ViewModels
     {
         public ReaderModel ReaderInfo { get; set; }
         public DAO DAO { get; set; }
+        public string ReaderImage { get; set; }
+        public string CardStatus { get; set; }
+        public string ReaderCat { get; set; }
+
         public ReaderDetailViewModel(long ID)
         {
             DAO = new DAO();
 
             ReaderInfo = DAO.GetDetailReaderById(ID);
+            var directory = AppDomain.CurrentDomain.BaseDirectory;
+            ReaderImage = directory + ReaderInfo.Image;
+            
+            if(ReaderInfo.ExpiryDate < DateTime.Now)
+            {
+                CardStatus = "Đã hết hạn";
+            } else
+            {
+                CardStatus = "Còn hạn";
+            }
+
+            if(ReaderInfo.CatID == 0)
+            {
+                ReaderCat = "Độc giả X";
+            } else
+            {
+                ReaderCat = "Độc giả Y";
+            }
         }
     }
 }

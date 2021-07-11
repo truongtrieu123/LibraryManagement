@@ -28,7 +28,7 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,10" HorizontalAlignment="Center" Orientation="Horizontal" >
             <Button 
-                    Command="{Binding SaveNewBook}"
+                    Command="{Binding SaveChanges}"
                     Foreground="#fff"
                     BorderThickness="0"
                     Content="Cập nhật"  FontSize="30" 

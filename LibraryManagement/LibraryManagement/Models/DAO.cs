@@ -326,6 +326,9 @@ namespace LibraryManagement.Models
                 cur.Name = info.Name;
                 cur.Email = info.Email;
                 cur.Image = info.Image;
+                cur.ExpiryDate = info.ExpiryDate;
+                cur.CatID = info.CatID;
+                cur.CreatedDate = info.CreatedDate;
             }
             catch(Exception ex)
             {
@@ -346,15 +349,40 @@ namespace LibraryManagement.Models
 
             Database.SaveChanges();
 
-            return ID;
+            return ID+1;
         }
         #endregion Reader
 
         public void UpdateReaderImageByID(long ID, string ImageSource)
         {
-            Reader cur = (Reader)Database.Readers.Where(r => r.ID == ID).SingleOrDefault();
+            var cur = Database.Readers.Where(r => r.ID == ID).SingleOrDefault();
             cur.Image = ImageSource;
             Database.SaveChanges();
+        }
+
+        public List<Reader> SearchReader(string text)
+        {
+            //Eliminate punctuation and toLower text
+            string normalizedText = "";
+            if (text != null)
+            {
+                normalizedText = HelperFunctions.RemovedUTF(text.ToLower());
+            }
+            
+            //Get all items list
+            IQueryable<Reader> readerList = Database.Readers;
+
+            var searchedList = readerList.Where(delegate (Reader r)
+            {
+                if (HelperFunctions.RemovedUTF(r.Name.ToLower()).Contains(normalizedText)
+                || (r.ID.ToString().Contains(normalizedText)))
+                    return true;
+                else return false;
+            }).AsQueryable();
+
+            List<Reader> readers = new List<Reader>(searchedList);
+
+            return readers;
         }
 
         #region BookRentalHistory Services

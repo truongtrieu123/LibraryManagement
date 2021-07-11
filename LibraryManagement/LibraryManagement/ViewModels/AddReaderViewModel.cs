@@ -97,7 +97,7 @@ namespace LibraryManagement.ViewModels
             _DAO = new DAO();
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(this.mainViewModel);       
-            SaveReader = new RelayCommand(o => StoreDateInput());
+            SaveReader = new RelayCommand(o => StoreDataInput());
             AddImage = new RelayCommand(o => AddReaderImage());
 
             CategoryID = -1;
@@ -174,7 +174,8 @@ namespace LibraryManagement.ViewModels
                 Name = this.ReaderName,
                 Email = this.Email,
                 CreatedDate = this.CreatedDate,
-                CatID = this.CategoryID
+                CatID = this.CategoryID,
+                ExpiryDate = this.CreatedDate.AddMonths(_DAO.CardPeriod())
             };
 
             return res;
@@ -186,7 +187,7 @@ namespace LibraryManagement.ViewModels
                 MessageBox.Show(message, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        public string StoreDateInput()
+        public string StoreDataInput()
         {
             string message = CheckDataInputError();
             AlertInputDataError(message);

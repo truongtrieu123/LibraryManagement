@@ -13,12 +13,37 @@ namespace LibraryManagement.ViewModels
 {
     public class ReaderListViewModel : BaseViewModel
     {
-        public List<Reader> ReaderList { get; set; }
+        private List<Reader> _readerList;
+        public List<Reader> ReaderList
+        {
+            get { return _readerList; }
+            set
+            {
+                _readerList = value;
+                OnPropertyChanged(nameof(_readerList));
+            }
+        }
         public DAO _DAO = new DAO();
         public MainViewModel mainViewModel;
+
         public ICommand UpdateView { get; set; }
         public ICommand ViewReaderDetail { get; set; }
         public ICommand EditReader { get; set; }
+        public ICommand SearchReader { get; set; }
+
+        private string _mySearchingText;
+        public string MySearchingText
+        {
+            get
+            {
+                return _mySearchingText;
+            }
+            set
+            {
+                _mySearchingText = value;
+                OnPropertyChanged(MySearchingText);
+            }
+        }
 
         public ReaderListViewModel()
         {
@@ -33,6 +58,7 @@ namespace LibraryManagement.ViewModels
             UpdateView = new UpdateMainViewCommand(mainViewModel);
             ViewReaderDetail = new RelayCommand(o => ShowReaderDetail(o));
             EditReader = new RelayCommand(o => EditReaderInfo(o));
+            SearchReader = new RelayCommand(o=>SearchReaders(o));
         }
 
         public void ShowReaderDetail(object parameter)
@@ -50,6 +76,12 @@ namespace LibraryManagement.ViewModels
             Console.WriteLine("ReaderListViewModel");
             Console.WriteLine(ID);
             mainViewModel.SelectedViewModel = new EditReaderViewModel(mainViewModel, ID);
+        }
+
+        public void SearchReaders(object parameter)
+        {
+            string searchingText = parameter.ToString();
+            ReaderList = _DAO.SearchReader(searchingText);
         }
     }
 }
