@@ -335,7 +335,7 @@ namespace LibraryManagement.Models
             return check;
         }
 
-        public void AddNewReader(Reader readerInfo )
+        public long AddNewReader(Reader readerInfo )
         {
             var readers = Database.Readers;
             long ID = Database.Readers.Max(r=>r.ID);
@@ -345,9 +345,17 @@ namespace LibraryManagement.Models
             Console.WriteLine(readerInfo.ToString());
 
             Database.SaveChanges();
+
+            return ID;
         }
         #endregion Reader
 
+        public void UpdateReaderImageByID(long ID, string ImageSource)
+        {
+            Reader cur = (Reader)Database.Readers.Where(r => r.ID == ID).SingleOrDefault();
+            cur.Image = ImageSource;
+            Database.SaveChanges();
+        }
 
         #region BookRentalHistory Services
         public List<BookRentalHitoryModel> GetBookRentalHitories()

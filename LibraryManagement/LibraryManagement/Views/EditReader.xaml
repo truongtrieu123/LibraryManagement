@@ -68,31 +68,27 @@
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
-                        <TextBox x:Name="bookName" Width="650"
+                        <TextBox x:Name="ReaderName" Width="650"
                                  HorizontalAlignment="Center" 
                                  Height="70" 
                                  Margin="10" TextWrapping="Wrap"   
-                                 Text="{Binding BookName}"
+                                 Text="{Binding ReaderName}"
                                  FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      materialDesign:HintAssist.Hint="Tên độc giả">
                         </TextBox>
                         <StackPanel Orientation="Horizontal" Margin="10,10,10,5" HorizontalAlignment="Center">
-                            <ComboBox Name="chosenCategory" 
-                                      ItemsSource="{Binding AllCategory}"
+                            <ComboBox Name="chosenCategory"
                                       materialDesign:HintAssist.Hint="Loại độc giả"  
                                       VerticalContentAlignment="Bottom" FontSize="25"
                                       SelectedIndex="{Binding CategoryID}"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}" 
                                       Height="70" Width="650">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding ID}"  ></TextBlock>
-                                            <TextBlock Text=" - "  ></TextBlock>
-                                            <TextBlock Text="{Binding Name}" ></TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                                <ComboBoxItem>
+                                    <TextBlock>Độc giả X</TextBlock>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <TextBlock>Độc giả Y</TextBlock>
+                                </ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="10,10,10,10" HorizontalAlignment="Center">
@@ -102,7 +98,7 @@
                                      FontSize="25" 
                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                        materialDesign:HintAssist.Hint="Địa chỉ Email"
-                                     Text="{Binding PublishingCompany}"
+                                     Text="{Binding Email}"
                                      >
                             </TextBox>
 
@@ -113,7 +109,7 @@
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                     materialDesign:HintAssist.Hint="Ngày lập thẻ" 
                                     Height="70" Width="650" FontSize="25"
-                                    SelectedDate="{Binding PublicationDate}"></DatePicker>
+                                    SelectedDate="{Binding CreatedDate}"></DatePicker>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
