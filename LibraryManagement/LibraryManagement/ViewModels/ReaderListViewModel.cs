@@ -20,7 +20,7 @@ namespace LibraryManagement.ViewModels
             set
             {
                 _readerList = value;
-                OnPropertyChanged(nameof(_readerList));
+                OnPropertyChanged(nameof(ReaderList));
             }
         }
         public DAO _DAO = new DAO();
