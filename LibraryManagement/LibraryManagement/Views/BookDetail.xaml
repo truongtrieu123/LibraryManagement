@@ -6,69 +6,85 @@
         xmlns:local="clr-namespace:LibraryManagement.Views"
         mc:Ignorable="d"
         Background="AliceBlue"
-        Title="{Binding Title}" Height="450" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="{Binding Title}" Height="550" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <DockPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Label DockPanel.Dock="Top" 
-               Content="Thông tin chi tiết" 
+               Content="THÔNG TIN CHI TIẾT" 
                FontSize="25"
                HorizontalAlignment="Center"
-               Foreground="Purple"
+               Foreground="Black"
                FontWeight="Bold"></Label>
         <StackPanel DockPanel.Dock="Left"
-                    Orientation="Vertical">
+                    Orientation="Vertical" VerticalAlignment="Center">
             <Rectangle x:Name="BookImage"
-                       Width="230" Height="300"
+                       Width="210" Height="290"
                        RadiusX="20" RadiusY="20">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding  BookModel.Image}" Stretch="Fill"></ImageBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label Content="Ảnh thực tế" 
-               FontSize="20"
-               HorizontalAlignment="Center"
-               Foreground="Black"
-               FontWeight="Bold">
-            </Label>
+            
         </StackPanel>
         <ScrollViewer DockPanel.Dock="Right"
                     Margin="10,10,0,0"
-                    Width="430" 
+                    Width="500" 
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
 
             <StackPanel Orientation="Vertical" Width="410" Margin="0,0,20,0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock Text="Tên sách: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.Name}" TextWrapping="Wrap" Width="320"  FontSize="18"  ></TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Width="150" Text="Tên sách" FontSize="17" FontWeight="Bold" VerticalAlignment="Center" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.Name}" VerticalAlignment="Center" TextWrapping="Wrap" Width="250" Padding="5"  FontSize="18"  ></TextBlock>
+                    </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Tác giả: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.Author}" TextWrapping="Wrap" Width="320"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Tác giả" Width="150" FontSize="18" FontWeight="Bold" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.Author}" TextWrapping="Wrap" Width="250" Padding="5" FontSize="18"  ></TextBlock>
+                    </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Thể loại: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.CatName}" TextWrapping="Wrap" Width="320"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Thể loại" FontSize="18" FontWeight="Bold" Width="150" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.CatName}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
+                    
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Ngày nhập kho: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.ImportDate}" TextWrapping="Wrap" Width="250"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Ngày nhập kho" FontSize="18" FontWeight="Bold" Width="150" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.ImportDate}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
+                    
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Nhà xuất bản: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.PublishingCompany}" TextWrapping="Wrap" Width="270"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Nhà xuất bản" Width="150" FontSize="18" FontWeight="Bold" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.PublishingCompany}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
+                    
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Ngày xuất bản: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.PublicationDate}" TextWrapping="Wrap" Width="170"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Ngày xuất bản" FontSize="18" Width="150" FontWeight="Bold" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.PublicationDate}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
+                    
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Vị trí kệ: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding BookModel.Location}" TextWrapping="Wrap" Width="200"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Vị trí kệ" FontSize="18" FontWeight="Bold" Width="150" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding BookModel.Location}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
-                    <TextBlock Text="Lưu kho: " FontSize="18" FontWeight="Bold" Foreground="DarkBlue"></TextBlock>
-                    <TextBlock Text="{Binding StorageState}" TextWrapping="Wrap" Width="200"  FontSize="18"  ></TextBlock>
+                    <TextBlock VerticalAlignment="Center" Text="Lưu kho" FontSize="18" FontWeight="Bold" Width="150" Foreground="#3A3A3A"></TextBlock>
+                    <Border BorderThickness="2" BorderBrush="#ABABAB" CornerRadius="5" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding StorageState}" TextWrapping="Wrap" Width="250"  FontSize="18" Padding="5" ></TextBlock>
+                    </Border>
+                    
                 </StackPanel>
             </StackPanel>
 

@@ -24,7 +24,7 @@ namespace LibraryManagement.ViewModels
         public MainViewModel()
         {
             Console.WriteLine("MainViewModel");
-            _selectedViewModel = new AboutUsViewModel(this);
+            _selectedViewModel = new BooksListViewModel(this);
             UpdateView = new UpdateMainViewCommand(this);
         }
     }

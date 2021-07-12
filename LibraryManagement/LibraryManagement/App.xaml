@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibraryManagement"
-            xmlns:views="clr-namespace:LibraryManagement.Views"
-            xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels"
+             xmlns:views="clr-namespace:LibraryManagement.Views"
+             xmlns:viewmodels="clr-namespace:LibraryManagement.ViewModels"
              Startup="Application_Startup" >
     <Application.Resources>
         <ResourceDictionary>

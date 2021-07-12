@@ -60,13 +60,13 @@
                         
                     </DockPanel>
                 </Border>
-                <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0">
+                <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0" >
                     <ComboBox  Background="Transparent" Foreground="#000"
                            BorderBrush="Transparent"
-                           BorderThickness="0"
+                           BorderThickness="0" VerticalContentAlignment="Center"
                            Style="{StaticResource MaterialDesignFilledComboBox}"
                            ItemsSource="{Binding CategoryList}"
-                           SelectedIndex="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}">
+                           SelectedIndex="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}" Margin="-2,-8,2,8">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding Path=Text, ElementName=SearchingTextBox}"/>
