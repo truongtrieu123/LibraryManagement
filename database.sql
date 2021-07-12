@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [LibraryManagement]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Database [LibraryManagement]    Script Date: 7/12/2021 4:05:30 PM ******/
 CREATE DATABASE [LibraryManagement]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [LibraryManagement] SET QUERY_STORE = OFF
 GO
 USE [LibraryManagement]
 GO
-/****** Object:  Table [dbo].[Book]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[Book]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -102,7 +102,7 @@ CREATE TABLE [dbo].[Book](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BookRentalHitory]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[BookRentalHitory]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +119,7 @@ CREATE TABLE [dbo].[BookRentalHitory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BookRentalList]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[BookRentalList]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +135,7 @@ CREATE TABLE [dbo].[BookRentalList](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Category]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[Category]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +149,7 @@ CREATE TABLE [dbo].[Category](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Config]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[Config]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +166,7 @@ CREATE TABLE [dbo].[Config](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Reader]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[Reader]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +185,7 @@ CREATE TABLE [dbo].[Reader](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[StoredBook]    Script Date: 7/12/2021 2:11:27 PM ******/
+/****** Object:  Table [dbo].[StoredBook]    Script Date: 7/12/2021 4:05:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,56 +203,38 @@ CREATE TABLE [dbo].[StoredBook](
 GO
 INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (0, N'Đắc nhân tâm', 2, N'Dale Canegie', CAST(N'2021-06-25T16:29:58.740' AS DateTime), CAST(N'2021-06-25T16:29:58.740' AS DateTime), 0, N'A22', N'Kim Đồng', N'Database\Images\BookImages\0.png')
 INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (1, N'21 Bài Học Cho Thế Kỷ 21', 4, N'Yuval Noah Harari ', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A11', N'Nhà Xuất Bản Tổng Hợp', N'Database\Images\BookImages\1.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (2, N'Sapiens: Lược Sử Loài Người Bằng Tranh - Tập 1: Khởi Đầu Của Loài Người', 4, N'Yuval Noah Harari', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A12', N'Nhà Xuất Bản Tổng Hợp', N'Database\Images\BookImages\2.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (2, N'Sapiens: Lược Sử Loài Người Bằng Tranh - Tập 1: Khởi Đầu Của Loài Người', 4, N'Yuval Noah Harari', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A12', N'Nhà Xuất Bản Tổng Hợp', N'Database\Images\BookImages\2.png')
 INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (3, N'Sapiens: Lược Sử Loài Người ', 4, N'Yuval Noah Harai', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A13', N'Nhà Xuất Bản Tổng Hợp', N'Database\Images\BookImages\3.png')
 INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (4, N'Homo Deus: Lược Sử Tương Lai', 4, N'Yuval Noah Harari', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A14', N'Nhà Xuất Bản Tổng Hợp', N'Database\Images\BookImages\4.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (5, N'Chủ Nghĩa Khắc Kỷ', 7, N'William B. Irvine', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A15', N'Nhà Xuất Bản Thái Hà', N'Database\Images\BookImages\5.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (6, N'Đàn Ông Sao Hỏa Đàn Bà Sao Kim', 7, N'John Gray', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A16', N'Nhà Xuất Bản Hồng Đức', N'Database\Images\BookImages\6.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (5, N'Chủ Nghĩa Khắc Kỷ', 7, N'William B. Irvine', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A15', N'Nhà Xuất Bản Thái Hà', N'Database\Images\BookImages\5.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (6, N'Đàn Ông Sao Hỏa Đàn Bà Sao Kim', 7, N'John Gray', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A16', N'Nhà Xuất Bản Hồng Đức', N'Database\Images\BookImages\6.png')
 INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (7, N'Nhà Giả Kim', 6, N'Paulo Coelho', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A17', N'Nhà Xuất Bản Hội Nhà Văn', N'Database\Images\BookImages\7.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (8, N'Hoàng tử bé', 6, N'Antone De Saint Exupery', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A18', N'Nhà Xuất Bản Hội Nhà Văn', N'Database\Images\BookImages\8.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (9, N'The Story Of Art - Câu Chuyện Nghệ Thuật', 3, N'E.H Gombrich', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A19', N'Nhà Xuất Bản Dân Trí', N'Database\Images\BookImages\9.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (10, N'Siêu Nhí Hỏi Nhà Khoa Học Trả Lời - 100 Bí Ẩn Mọi Đứa Trẻ Đều Muốn Hỏi Một Nhà', 2, N'Robert Winston', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A20', N'Nhà Xuất Bản Dân Trí
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (8, N'Hoàng tử bé', 6, N'Antone De Saint Exupery', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A18', N'Nhà Xuất Bản Hội Nhà Văn', N'Database\Images\BookImages\8.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (9, N'The Story Of Art - Câu Chuyện Nghệ Thuật', 3, N'E.H Gombrich', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A19', N'Nhà Xuất Bản Dân Trí', N'Database\Images\BookImages\9.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (10, N'Siêu Nhí Hỏi Nhà Khoa Học Trả Lời - 100 Bí Ẩn Mọi Đứa Trẻ Đều Muốn Hỏi Một Nhà', 2, N'Robert Winston', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A20', N'Nhà Xuất Bản Dân Trí
 ', N'Database\Images\BookImages\10.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (11, N'Bách Khoa Tri Thức Về Khám Phá Thế Giới Cho Trẻ Em - Thiên Văn Học', 2, N'Rachel Firth', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A21', N'Nhà Xuất Bản Thế Giới', N'Database\Images\BookImages\11.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (12, N'Sách Pháp Luật Về Giao Dịch Điện Tử Trên Thị Trường Chứng Khoán Ở Việt Nam Năm 2020 - NXB Chính Trị Quốc Gia Sự Thật', 1, N'PGS.TS. Phạm Thị Giang Thu (Chủ biên) - ThS. Nguyễn Thu Trang - TS. Nguyễn Ngọc Lương', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A22', N'Nhà Xuất Bản Chính Trị Quốc Gia Sự Thật', N'Database\Images\BookImages\12.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (13, N'Giáo Trình C++ Và Lập Trình', 5, N'GS. Phạm Văn Ất ( chủ biên), Lê Trường Thông', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A23', N'Nhà Xuất Bản Bách Khoa Hà Nội', N'Database\Images\BookImages\13.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (14, N'Doraemon', 8, N'Fujiko F. Fujio', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 0, N'A24', N'Nhà Xuất Bản Kim Đồng', N'Database\Images\BookImages\14.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (15, N'Trong Gia Đình', 3, N'Dale Carnegie', CAST(N'2011-02-01T00:00:00.000' AS DateTime), CAST(N'2011-02-01T00:00:00.000' AS DateTime), 0, N'A43', N'First News', N'Database\Images\BookImages\15.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (16, N'Cô gái đến từ hôm qua', 3, N'Nguyễn Nhật Ánh', CAST(N'2021-06-27T16:58:24.793' AS DateTime), CAST(N'2021-06-27T16:58:24.793' AS DateTime), 0, N'A33', N'First News', N'Database\Images\BookImages\16.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (17, N'Không gia đình', 4, N'Hector Malot', CAST(N'2021-06-01T00:00:00.000' AS DateTime), CAST(N'2021-06-01T00:00:00.000' AS DateTime), 0, N'A33', N'First News', N'Database\Images\BookImages\17.png')
-INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (18, N'Conan - Tập 98', 9, N'Gosho AOYAMA', CAST(N'2014-06-04T00:00:00.000' AS DateTime), CAST(N'2014-06-04T00:00:00.000' AS DateTime), 0, N'A55', N'Kim Đồng', N'Database\Images\BookImages\18.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (11, N'Bách Khoa Tri Thức Về Khám Phá Thế Giới Cho Trẻ Em - Thiên Văn Học', 2, N'Rachel Firth', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A21', N'Nhà Xuất Bản Thế Giới', N'Database\Images\BookImages\11.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (12, N'Sách Pháp Luật Về Giao Dịch Điện Tử Trên Thị Trường Chứng Khoán Ở Việt Nam Năm 2020 - NXB Chính Trị Quốc Gia Sự Thật', 1, N'PGS.TS. Phạm Thị Giang Thu (Chủ biên) - ThS. Nguyễn Thu Trang - TS. Nguyễn Ngọc Lương', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A22', N'Nhà Xuất Bản Chính Trị Quốc Gia Sự Thật', N'Database\Images\BookImages\12.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (13, N'Giáo Trình C++ Và Lập Trình', 5, N'GS. Phạm Văn Ất ( chủ biên), Lê Trường Thông', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A23', N'Nhà Xuất Bản Bách Khoa Hà Nội', N'Database\Images\BookImages\13.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (14, N'Doraemon', 8, N'Fujiko F. Fujio', CAST(N'2019-09-01T00:00:00.000' AS DateTime), CAST(N'2019-09-01T00:00:00.000' AS DateTime), 1, N'A24', N'Nhà Xuất Bản Kim Đồng', N'Database\Images\BookImages\14.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (15, N'Trong Gia Đình', 3, N'Dale Carnegie', CAST(N'2011-02-01T00:00:00.000' AS DateTime), CAST(N'2011-02-01T00:00:00.000' AS DateTime), 1, N'A43', N'First News', N'Database\Images\BookImages\15.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (16, N'Cô gái đến từ hôm qua', 3, N'Nguyễn Nhật Ánh', CAST(N'2021-06-27T16:58:24.793' AS DateTime), CAST(N'2021-06-27T16:58:24.793' AS DateTime), 1, N'A33', N'First News', N'Database\Images\BookImages\16.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (17, N'Không gia đình', 4, N'Hector Malot', CAST(N'2021-06-01T00:00:00.000' AS DateTime), CAST(N'2021-06-01T00:00:00.000' AS DateTime), 1, N'A33', N'First News', N'Database\Images\BookImages\17.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (18, N'Conan - Tập 98', 9, N'Gosho AOYAMA', CAST(N'2014-06-04T00:00:00.000' AS DateTime), CAST(N'2014-06-04T00:00:00.000' AS DateTime), 1, N'A55', N'Kim Đồng', N'Database\Images\BookImages\18.png')
+INSERT [dbo].[Book] ([ID], [Name], [CatID], [Author], [PublicationDate], [ImportDate], [StorageState], [Location], [PublishingCompany], [Image]) VALUES (19, N'Giết Con Chim Nhại', 3, N'Happer Lee', CAST(N'2021-07-11T00:00:00.000' AS DateTime), CAST(N'2021-07-11T00:00:00.000' AS DateTime), 0, N'A21', N'NXB Sự Thật', N'Database\Images\BookImages\19.png')
 GO
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (1, 1, CAST(N'2021-06-25T16:29:58.000' AS DateTime), 1, CAST(N'2021-07-10T21:54:34.500' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (2, 2, CAST(N'2021-06-15T16:29:58.000' AS DateTime), 1, CAST(N'2021-06-29T10:22:17.017' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (3, 3, CAST(N'2021-06-25T16:29:58.000' AS DateTime), 0, NULL)
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (4, 4, CAST(N'2021-06-25T16:29:58.000' AS DateTime), 1, CAST(N'2021-06-29T10:22:22.360' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (5, 5, CAST(N'2021-06-27T16:58:24.000' AS DateTime), 0, CAST(N'2021-06-29T10:22:26.637' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (6, 1, CAST(N'2021-06-29T10:11:46.000' AS DateTime), 1, CAST(N'2021-06-29T10:16:21.697' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (7, 1, CAST(N'2021-06-29T10:16:49.000' AS DateTime), 0, NULL)
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (8, 1, CAST(N'2021-06-29T10:21:43.000' AS DateTime), 1, CAST(N'2021-06-29T10:21:51.043' AS DateTime))
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (9, 2, CAST(N'2021-06-29T10:22:44.000' AS DateTime), 0, NULL)
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (10, 2, CAST(N'2021-06-29T10:50:49.000' AS DateTime), 0, NULL)
-INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (11, 1, CAST(N'2021-06-29T10:53:21.000' AS DateTime), 0, NULL)
+INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (0, 1, CAST(N'2021-05-01T15:15:41.000' AS DateTime), 0, NULL)
+INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (1, 3, CAST(N'2021-07-12T15:36:53.000' AS DateTime), 0, NULL)
+INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (2, 4, CAST(N'2021-05-01T15:37:37.000' AS DateTime), 0, NULL)
+INSERT [dbo].[BookRentalHitory] ([ID], [ReaderID], [CreatedDate], [State], [ReturnDate]) VALUES (3, 9, CAST(N'2021-07-12T15:49:03.000' AS DateTime), 1, CAST(N'2021-07-12T15:50:02.863' AS DateTime))
 GO
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (0, 0, NULL)
 INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (1, 1, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (2, 1, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (3, 2, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (3, 10, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (4, 2, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (5, 3, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (6, 3, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (7, 4, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (7, 9, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (8, 4, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (9, 5, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (10, 5, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (11, 2, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (12, 8, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (12, 11, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (13, 7, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (15, 7, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (16, 7, NULL)
-INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (17, 7, NULL)
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (3, 1, NULL)
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (4, 1, NULL)
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (7, 2, NULL)
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (15, 3, NULL)
+INSERT [dbo].[BookRentalList] ([BookID], [BookRentalID], [No]) VALUES (17, 3, NULL)
 GO
 INSERT [dbo].[Category] ([ID], [Name]) VALUES (1, N'Chính trị - pháp luật')
 INSERT [dbo].[Category] ([ID], [Name]) VALUES (2, N'Khoa học công nghệ')
@@ -265,17 +247,21 @@ INSERT [dbo].[Category] ([ID], [Name]) VALUES (8, N'Sách thiếu nhi')
 INSERT [dbo].[Category] ([ID], [Name]) VALUES (9, N'Ca dao dân gian')
 INSERT [dbo].[Category] ([ID], [Name]) VALUES (10, N'Kỹ năng sống')
 GO
-INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (1, N'ThoiHanThe', N'string', N'12', 1)
+INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (1, N'ThoiHanThe', N'string', N'6', 1)
 INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (2, N'TuoiToiThieu', N'string', N'18', 1)
-INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (3, N'SoLuongSachDuocMuonToiDa', N'long', N'3', 1)
-INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (4, N'SoNgayMuonToiDa', N'long', N'7', 1)
+INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (3, N'SoLuongSachDuocMuonToiDa', N'long', N'1', 1)
+INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (4, N'SoNgayMuonToiDa', N'long', N'15', 1)
 INSERT [dbo].[Config] ([ID], [Name], [DateType], [Value], [State]) VALUES (5, N'KhoangCachNamXuatBan', N'long', N'10', 1)
 GO
-INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (1, N'Trần Văn An', N'an@gmail.com', 1, CAST(N'2021-06-15T00:00:00.000' AS DateTime), NULL, N'Database\Images\ReaderImages\1.png')
+INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (1, N'Trần Văn An', N'an@gmail.com', 1, CAST(N'2021-06-15T00:00:00.000' AS DateTime), CAST(N'2022-06-15T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\1.png')
 INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (2, N'Nguyễn Thị Bình', N'binh@gmail.com', 1, CAST(N'2021-06-15T00:00:00.000' AS DateTime), CAST(N'2022-06-15T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\2.png')
 INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (3, N'Lê Văn Cường', N'cuong@gmail.com', 0, CAST(N'2021-06-15T00:00:00.000' AS DateTime), CAST(N'2022-06-15T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\3.png')
 INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (4, N'Dương Văn Dương', N'duong@gmail.com', 0, CAST(N'2021-06-15T00:00:00.000' AS DateTime), CAST(N'2022-06-15T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\4.png')
 INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (5, N'Nguyễn Văn Tài Em', N'taiem@gmail.com', 0, CAST(N'2021-06-15T00:00:00.000' AS DateTime), CAST(N'2022-06-15T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\5.png')
+INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (6, N'Lê Văn Hoàng', N'letrung020820001@gmail.com', 0, CAST(N'2021-07-11T00:00:00.000' AS DateTime), CAST(N'2022-07-11T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\6.png')
+INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (7, N'Lê Văn Đức', N'letrung020820001@gmail.com', 0, CAST(N'2021-07-11T00:00:00.000' AS DateTime), CAST(N'2022-07-11T00:00:00.000' AS DateTime), N'Database\Images\ReaderImages\7.png')
+INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (8, N'Lê Văn Thành', N'letrung02082000@gmail.com', 1, CAST(N'2021-07-12T15:23:06.593' AS DateTime), CAST(N'2022-07-12T15:23:06.593' AS DateTime), N'Database\Images\ReaderImages\8.png')
+INSERT [dbo].[Reader] ([ID], [Name], [Email], [CatID], [CreatedDate], [ExpiryDate], [Image]) VALUES (9, N'Lê Văn Trung', N'letrung020820001@gmail.com', 0, CAST(N'2021-07-12T15:44:19.417' AS DateTime), CAST(N'2022-07-12T15:44:19.417' AS DateTime), N'Database\Images\ReaderImages\9.png')
 GO
 ALTER TABLE [dbo].[Book]  WITH CHECK ADD  CONSTRAINT [FK_Book_Category] FOREIGN KEY([CatID])
 REFERENCES [dbo].[Category] ([ID])
