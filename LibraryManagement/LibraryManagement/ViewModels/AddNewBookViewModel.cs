@@ -251,7 +251,7 @@ namespace LibraryManagement.ViewModels
                 Author = this.Author,
                 Location = this.Location,
                 CatID = this.CategoryID + 1,
-                StorageState = false,
+                StorageState = true,
                 ImportDate = System.DateTime.Now,
                 PublishingCompany = this.PublishingCompany,
                 PublicationDate = this.PublicationDate,

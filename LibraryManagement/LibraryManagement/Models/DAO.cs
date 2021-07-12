@@ -494,8 +494,16 @@ namespace LibraryManagement.Models
         /// <returns>ID</returns>
         public long AddBookRentalHitory(BookRentalHitory curBookList)
         {
-            long ID = Database.BookRentalHitories.Max(r => r.ID)+1;
-            
+            long ID = 0;
+            try
+            {
+                ID = Database.BookRentalHitories.Max(r => r.ID) + 1;
+            }
+            catch (Exception ex)
+            {
+                ID = 0;
+            }
+
             curBookList.ID = ID;
             Database.BookRentalHitories.Add(curBookList);
             Database.SaveChanges();

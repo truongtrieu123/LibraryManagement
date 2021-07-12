@@ -144,6 +144,7 @@ namespace LibraryManagement.ViewModels
                 CreatedDate = this.CreatedDate,
                 CatID = this.CategoryID,
                 Image = "Database\\Images\\ReaderImages\\" + this.ID.ToString() + ".png",
+                ExpiryDate = this.CreatedDate.AddMonths(_DAO.CardPeriod())
             };
 
             return res;
