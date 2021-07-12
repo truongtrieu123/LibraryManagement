@@ -32,7 +32,7 @@
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
     </Window.Triggers>
-    <DockPanel LastChildFill="true" Height="700" Width="1200"  >
+    <DockPanel LastChildFill="true" Height="700" Width="1250"  >
         <Border BorderBrush="LightBlue" BorderThickness="2" >
             <DockPanel>
                 <Grid Height="45" DockPanel.Dock="Top" VerticalAlignment="Top" Background="LightBlue" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >

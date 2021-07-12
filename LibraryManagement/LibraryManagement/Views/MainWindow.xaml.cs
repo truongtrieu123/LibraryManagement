@@ -77,7 +77,7 @@ namespace LibraryManagement.Views
             {
                 openMenuButton.Visibility = Visibility.Collapsed;
                 closeMenuButton.Visibility = Visibility.Visible;
-                UserAccountFrame.Visibility = Visibility.Visible;
+                //UserAccountFrame.Visibility = Visibility.Visible;
             }
             else { }
 
@@ -91,7 +91,7 @@ namespace LibraryManagement.Views
             {
                 openMenuButton.Visibility = Visibility.Visible;
                 closeMenuButton.Visibility = Visibility.Collapsed;
-                UserAccountFrame.Visibility = Visibility.Hidden;
+                //UserAccountFrame.Visibility = Visibility.Hidden;
             }
             else { }
         }
