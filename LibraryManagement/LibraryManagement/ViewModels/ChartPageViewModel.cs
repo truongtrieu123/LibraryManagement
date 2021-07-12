@@ -4,6 +4,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,40 +60,79 @@ namespace LibraryManagement.ViewModels
             }
         }
 
+        private List<int> yearList;
+        public List<int> YearList
+        {
+            get
+            {
+                return yearList;
+            }
+            set
+            {
+                yearList = value;
+                OnPropertyChanged(nameof(YearList));
+
+            }
+        }
+
+        private int selectedYear;
+        public int SelectedYear
+        {
+            get
+            {
+                return selectedYear;
+            }
+            set
+            {
+                selectedYear = value;
+
+                OnPropertyChanged(nameof(SelectedYear));
+                List<int> bookRentalDataByMonth = _DAO.GetBookRentalDataByMonth(YearList[value]);
+                List<(string, int)> categoryDataByYear = _DAO.GetCategoryDataByYear(YearList[value]);
+                List<int> registeredReaderByMonth = _DAO.GetRegisteredReaderDataByMonth(YearList[value]);
+                InitRegisteredReader(registeredReaderByMonth);
+                InitBookRentalData(bookRentalDataByMonth);
+                InitCategoryData(categoryDataByYear);
+            }
+        }
+
         public ChartPageViewModel(MainViewModel param)
         {
             _DAO = new DAO();
             mainViewModel = param;
             UpdateView = new UpdateMainViewCommand(this.mainViewModel);
-            List<int> bookRentalDataByMonth = _DAO.GetBookRentalDataByMonth(2021);
-            List<(string,int)> categoryDataByYear = _DAO.GetCategoryDataByYear(2021);
-            List<int> registeredReaderByMonth = _DAO.GetRegisteredReaderDataByMonth(2021);
+            YearList = _DAO.GetYearList();
+            SelectedYear = YearList.Count()-1;
+            List<int> bookRentalDataByMonth = _DAO.GetBookRentalDataByMonth(YearList[SelectedYear]);
+            List<(string,int)> categoryDataByYear = _DAO.GetCategoryDataByYear(YearList[SelectedYear]);
+            List<int> registeredReaderByMonth = _DAO.GetRegisteredReaderDataByMonth(YearList[SelectedYear]);
             InitRegisteredReader(registeredReaderByMonth);
             InitBookRentalData(bookRentalDataByMonth);
             InitCategoryData(categoryDataByYear);
+      
         }
 
         public void InitRegisteredReader(List<int> data)
         {
             RegistredReaderData = new SeriesCollection { };
-            int currentYear = 2021;
+            int currentYear = YearList[SelectedYear];
             RegistredReaderData.Add(
                 new ColumnSeries
                 {
                     Title = $"Thống kê số lượt đăng ký mới theo từng tháng (năm {currentYear})",
-                    Values = new ChartValues<double> { data[0], data[1], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11] },
+                    Values = new ChartValues<double> { data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11] },
                 });
         }
 
         public void InitBookRentalData(List<int> data)
         {
             BookRentalData = new SeriesCollection { };
-            int currentYear = 2021;
+            int currentYear = YearList[SelectedYear];
             BookRentalData.Add(
                 new ColumnSeries
                 {
                     Title =$"Thống kê số phiếu mượn theo từng tháng (năm {currentYear})",
-                    Values = new ChartValues<double> { data[0], data[1], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11] },
+                    Values = new ChartValues<double> { data[0], data[1], data[2],data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11] },
                 });
         }
 

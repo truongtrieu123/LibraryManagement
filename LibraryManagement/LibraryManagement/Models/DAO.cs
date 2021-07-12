@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LibraryManagement.Helper;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace LibraryManagement.Models
 {
@@ -646,12 +647,16 @@ namespace LibraryManagement.Models
             for (int i = 0; i < 12; ++i)
                 data.Add(0);
 
-            int month = 0;
+            int month = 1;
             foreach(var cur in bookRentalHitories)
             {
                 month = cur.CreatedDate.Month;
                 data[month - 1] += 1;
             }
+
+            for (int i = 0; i < 12; ++i)
+                Debug.WriteLine(data[i]);
+
             return data;
         }
 
@@ -665,7 +670,9 @@ namespace LibraryManagement.Models
                         on brl.BookID equals book.ID
                         join cat in Database.Categories
                         on book.CatID equals cat.ID
-                        select cat)
+                        where brh.CreatedDate.Year==year
+                        select cat
+                        )
                         .GroupBy(r => r.ID)
                         .Select(
                             g => new
@@ -690,7 +697,6 @@ namespace LibraryManagement.Models
             List<Reader> readers = Database.Readers.Where(r => r.CreatedDate.Year == year).ToList();
             for (int i = 0; i < 12; ++i)
                 data.Add(0);
-
             int month = 0;
             foreach (var cur in readers)
             {
@@ -700,6 +706,11 @@ namespace LibraryManagement.Models
             return data;
         }
 
+        public List<int> GetYearList()
+        {
+            List<int> yearList = Database.BookRentalHitories.OrderBy(r => r.CreatedDate.Year).Select(r => r.CreatedDate.Year).Distinct().ToList();
+            return yearList;
+        }
         #endregion Report Services
     }
 }
