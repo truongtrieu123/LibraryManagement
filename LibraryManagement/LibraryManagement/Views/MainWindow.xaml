@@ -12,14 +12,14 @@
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="47"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="MenuClose">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="47"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -33,7 +33,7 @@
         </EventTrigger>
     </Window.Triggers>
     <DockPanel LastChildFill="true" Height="700" Width="1200"  >
-        <Border BorderBrush="LightBlue" BorderThickness="3" >
+        <Border BorderBrush="LightBlue" BorderThickness="2" >
             <DockPanel>
                 <Grid Height="45" DockPanel.Dock="Top" VerticalAlignment="Top" Background="LightBlue" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
                     <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
                                     <ImageBrush ImageSource="/Data/Images/avatar-1577909_1280.png" ></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Label x:Name="Username" FontWeight="ExtraBlack" FontSize="15" HorizontalAlignment="Center">Admin1</Label>
+                            <Label x:Name="Username" Foreground="White" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center">Admin</Label>
                         </StackPanel>
                         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="MediumVioletRed" BorderBrush="Transparent">
                             <ListViewItem Height="60" Width="200" Foreground="LightYellow" Padding="0">
@@ -95,7 +95,7 @@
                                                 <TextBlock x:Name="Book" Text="Tất cả sách" ></TextBlock>
                                             </materialDesign:PackIcon.ToolTip>
                                         </materialDesign:PackIcon>
-                                        <TextBlock Text="Sách" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                        <TextBlock Text="Tất cả sách" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
                                     </StackPanel>
                                 </Button>
 
@@ -182,10 +182,10 @@
                                     <StackPanel Orientation="Horizontal"  Height="60" >
                                         <materialDesign:PackIcon Kind="Settings" Width="35" Height="35" VerticalAlignment="Center" Foreground="White" Background="Transparent" Margin="5">
                                             <materialDesign:PackIcon.ToolTip>
-                                                <TextBlock x:Name="Configuration" Text="Cấu hình"></TextBlock>
+                                                <TextBlock x:Name="Configuration" Text="Thiết lập"></TextBlock>
                                             </materialDesign:PackIcon.ToolTip>
                                         </materialDesign:PackIcon>
-                                        <TextBlock Text="Cấu hình" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
+                                        <TextBlock Text="Thiết lập" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>
                                     </StackPanel>
                                 </Button>
 
@@ -199,9 +199,9 @@
                                         CommandParameter="AboutUs"
                                         Style="{StaticResource  MaterialDesignFlatDarkBgButton}">
                                     <StackPanel Orientation="Horizontal"  Height="60" >
-                                        <materialDesign:PackIcon Kind="About" Width="35" Height="36" Foreground="White" Background="Transparent" VerticalAlignment="Top" Margin="5,12,5,0">
+                                        <materialDesign:PackIcon Kind="About" Width="35" Height="36" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" Margin="5,0,5,12">
                                             <materialDesign:PackIcon.ToolTip>
-                                                <TextBlock x:Name="AboutUs" Text="Về chúng tôi"></TextBlock>
+                                                <TextBlock x:Name="AboutUs" Text="Thông tin"></TextBlock>
                                             </materialDesign:PackIcon.ToolTip>
                                         </materialDesign:PackIcon>
                                         <TextBlock Text="Về chúng tôi" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="20" Foreground="CadetBlue"/>

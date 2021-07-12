@@ -61,7 +61,7 @@
                 </DockPanel>
             </Border>
             <Border Grid.Column="1" BorderBrush="#007ABE" BorderThickness="2" Margin="10, 10, 10,10" CornerRadius="5" Padding="0">
-                <ComboBox  Background="Transparent" Foreground="#0066FF" 
+                <ComboBox  Background="Transparent" Foreground="#007ABE" 
                            FontFamily="Roboto" BorderBrush="Transparent" 
                            BorderThickness="0" 
                            Padding="10,0,5,0" Height="52" VerticalContentAlignment="Center"
@@ -76,7 +76,7 @@
                         </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding StateName}" FontSize="21" FontWeight="Bold" Foreground="#0066FF" ></TextBlock>
+                            <TextBlock Text="{Binding StateName}" FontSize="21" FontWeight="Bold" Foreground="#007ABE" ></TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
 
